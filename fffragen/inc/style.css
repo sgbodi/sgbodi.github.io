@@ -1,0 +1,269 @@
+@font-face {
+  font-family:bodi;
+  src: url(./bodi.ttf);
+}
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('./fafonts/fontawesome-webfont.eot?v=4.5.0');
+  src: url('./fafonts/fontawesome-webfont.eot?#iefix&v=4.5.0') format('embedded-opentype'), url('./fafonts/fontawesome-webfont.woff2?v=4.5.0') format('woff2'), url('./fafonts/fontawesome-webfont.woff?v=4.5.0') format('woff'), url('./fafonts/fontawesome-webfont.ttf?v=4.5.0') format('truetype'), url('./fafonts/fontawesome-webfont.svg?v=4.5.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body{
+  font-family:"Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Lucida", Verdana, Arial, sans-serif;
+  background-color:#fff;
+  padding-bottom:4em; /*space for testcontrols overlay */
+}
+
+h1,h2,h3,h4,h5,h6 {
+  color:#33b; 
+  margin-top:0.1em;
+}
+
+#quelle:before {content:"Quelle: "}
+#quelle {font-size:80%; font-weight:thin; text-align:right; margin-top:1.2em; }
+
+
+/* Settings */
+#settings { background-color:#33b; color:#fff; }
+#settings .cfgblock { padding:0; }
+#settings h6 { color:#fff; margin:0; margin-top:1em; }
+
+#settings ul { margin:0; padding:0; }
+#settings li { margin:0; padding:.1em 0 .1em .3em; list-style-type:none; }
+#settings li label { display:inline-block; min-width:8em; }
+#settings li label:hover { background-color:#66b; }
+#settings .hint { font-size:80%; font-weight:thin; margin-left:1.2em; }
+#btnstart {
+	border:1px solid white;
+	font-size:150%;
+	color:#fff;
+	background-color:#f2e;
+	margin:.3em;
+	min-width:10em;
+}
+#btnstart:before {
+	/*.fa*/
+	display: inline-block;
+	font: normal normal normal 14px/1 FontAwesome;
+	font-size: inherit;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	margin-right:.2em;
+	/*.fa-play-circle*/
+	content: "\f144";
+}
+
+.notsupported , .notsupported * { text-decoration:line-through; }
+
+
+/* During Test */
+#testcontrols {
+	border:1px solid black;
+	background-color:#33b;
+	color:#fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+#testcontrols button {
+	border:1px solid white;
+	font-size:150%;
+	color:#fff;
+	background-color:#f2e;
+	/*float:right;*/
+	width:100%;
+	padding-top:.5em;
+	padding-bottom:.5em;
+}
+#testcontrols button:before {
+	/*.fa*/
+	display: inline-block;
+	font: normal normal normal 14px/1 FontAwesome;
+	font-size: inherit;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	margin-right:.2em;
+}
+#testcontrols #showresult:before {
+	/*.fa-check-square: content: "\f14a"; */
+	/*.fa-send*/
+	content: "\f1d8";
+}
+#testcontrols #next:before {
+  /*.fa-arrow-circle-right  content: "\f0a9";*/
+  /*.fa-step-forward*/
+  content: "\f051";
+}
+
+#testcontrols span {
+	font-size:80%;
+}
+
+#testcontrols .testinfo {
+	display: inline-block;
+}
+#testcontrols .testinfo:before {
+	/*.fa*/
+	display: inline-block;
+	font: normal normal normal 14px/1 FontAwesome;
+	font-size: inherit;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	margin-right:.2em;
+}
+#testcontrols #qXofY:before {
+	/*fa-question-circle*/
+	content: "\f059";
+}
+#testcontrols #qTime:before {
+	/*fa-hourglass-start*/
+	content: "\f251";
+}
+#testcontrols #qCorrect:before {
+	/*.fa-percent*/
+	content: "\f295";
+}
+	
+/* Query results display */
+.answ:hover { background-color:#eee; border-color:#ccc; }
+
+.answ { border-left:.5em solid white; padding-left:.2em; margin-top:1em; }
+.answ.qq { margin-top:.1em; margin-bottom:.2em; }
+.rt { font-size:80%; color:transparent; }
+
+.qtrue { border-color: green; }
+.qtrue > .rt { color:green; }
+.qtrue > .rt::before { content:"Korrekt:"; }
+
+.qfalse { border-color: red; }
+.qfalse > .rt { color:red; }
+.qfalse > .rt::before { content:"Deine Antwort ist falsch "; }
+
+.qfalse.cor > .rt > i::before { content:"( müsste sein \f14a  )"; color:#ccc; font: normal normal normal 100% FontAwesome; }
+.qfalse.nco > .rt > i::before { content:"( müsste sein \f0c8  )"; color:#ccc; font: normal normal normal 100% FontAwesome; }
+
+ 
+.qtrue > .rt::before { content:"Korrekt"; }
+
+
+/*
+p.qfalse { border-left:1em solid red; background-color: #ffb3b3; }
+p.qfalse > .qft { display: block; font-size:80%; font-weight:bold; }
+
+p.qtrue { border-left:1em solid green; }
+p.qtrue > .qtt { display: block; font-size:80%; font-weight:bold; }
+
+.qtt::before { content:"Richtige Antwort"; }
+.qft::before { content:"Falsche Antwort"; }
+*/
+
+
+article { margin-bottom:3em; }
+/* --------------------- */
+
+
+#bybodi { margin-top:2em; text-align:right; background-color:#eee; color:#ccc; font-size:80%; }
+#bodilogo { display:inline-block; font-family: bodi, Arial; text-transform:uppercase; color:#ccc;}
+#bodilogo:hover { color:#000; background-color:#9c3;}
+
+#disclaimer { font-size:80%; color:#ccc; }
+
+
+.strange {
+	background-color:yellow;
+}
+
+	
+/* Desktop */
+@media only screen and (min-width: 768px) {
+
+	#testcontrols {
+		position: fixed;
+		top: 0;
+		bottom:auto;
+		left: auto;
+		right: 0;
+		width: 14em;
+		height:100%;
+	}
+
+	#testcontrols .testinfo {
+		display: block;
+	}
+
+	#testcontrols button {
+		float:none;
+		display:block;
+	}
+
+	#testcontrols span {
+		display:block;
+	}
+
+	body {
+		padding-right: 15em;
+	}
+	
+	#testcontrols button { }
+	#testcontrols #showresult { }
+	#testcontrols #next { }
+}
+
+
+/* ===INDEX PAGE ==== */
+.donthitme {
+	background-color: #f00;
+	color: #fff;
+	padding:0.3em;
+}
+.donthitme:before {
+  /*.fa*/
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /*.fa-lg*/
+  font-size: 1.33333333em;
+  line-height: 0.75em;
+  vertical-align: -15%;
+  /*fa-exclamation-triangle*/
+  content: "\f071";
+}
+
+/*Main menu*/
+nav {
+	max-width:35em;
+	padding:0;
+}
+nav ul {
+	padding:0;
+}
+nav li {
+	list-style-type:none;
+	padding:0;
+}
+nav li a {
+	display:block;
+	background-color:#33b;
+	padding:0.3em;
+	margin:0.1em;
+	color:#fff;
+	text-decoration:none;
+}
+
+nav li a:hover {
+	background-color:#66b;
+	text-decoration:underline;
+}
+
+/*----------------------------*/

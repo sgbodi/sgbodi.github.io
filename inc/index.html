@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Font Test</title>
+<style>
+@font-face {
+  font-family:bodi;
+  src: url(./bodi.ttf);
+}
+
+@font-face {
+  font-family:brankovic;
+  src: url(./brankovic.ttf);
+}
+@font-face {
+  font-family:kulminoituva;
+  src: url(./kulminoituva.ttf);
+}
+@font-face {
+  font-family:thegreatescape;
+  src: url(./TheGreatEscape.ttf);
+}
+@font-face {
+  font-family:thegreatescape;
+  font-weight:bold;
+  src: url(./TheGreatEscapeBold.ttf);
+}
+
+.tst01:before { content:"1: "; font-family:arial; font-weight:bold; }
+.tst02:before { content:"2: "; font-family:arial; font-weight:bold; }
+.tst03:before { content:"3: "; font-family:arial; font-weight:bold; }
+.tst04:before { content:"4: "; font-family:arial; font-weight:bold; }
+.tst05:before { content:"5: "; font-family:arial; font-weight:bold; }
+.tst06:before { content:"6: "; font-family:arial; font-weight:bold; }
+.tst07:before { content:"7: "; font-family:arial; font-weight:bold; }
+
+.test { font-size:14pt; border-bottom:1px solid #eee;  }
+.test:hover { background-color:#eee; }
+.tst01 { }
+.tst02 { font-family:brankovic; color:#888; }
+.tst03 { font-family:kulminoituva; }
+.tst04 { font-family:thegreatescape; }
+.tst05 { font-family:thegreatescape; font-weight:bold; }
+.tst06 { display:none; }
+.tst07 { display:none; }
+.tst08 { display:none; }
+.tst09 { display:none; }
+.bodi  {  font-family:bodi; }
+
+</style>
+</head>
+<body>
+
+<div class="test tst01">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTXYZ 0123456789 &auml;&ouml;&uuml; &Auml;&Ouml;&Uuml; &deg;!"$%&/()=?`Q&lt;&gt;@*+~#' ,;.: -_ &euro; &copy;&trade;&para;</div>
+<div class="test tst02">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTXYZ 0123456789 &auml;&ouml;&uuml; &Auml;&Ouml;&Uuml; &deg;!"$%&/()=?`Q&lt;&gt;@*+~#' ,;.: -_ &euro; &copy;&trade;&para;</div>
+<div class="test tst03">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTXYZ 0123456789 &auml;&ouml;&uuml; &Auml;&Ouml;&Uuml; &deg;!"$%&/()=?`Q&lt;&gt;@*+~#' ,;.: -_ &euro; &copy;&trade;&para;</div>
+<div class="test tst04">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTXYZ 0123456789 &auml;&ouml;&uuml; &Auml;&Ouml;&Uuml; &deg;!"$%&/()=?`Q&lt;&gt;@*+~#' ,;.: -_ &euro; &copy;&trade;&para;</div>
+<div class="test tst05">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTXYZ 0123456789 &auml;&ouml;&uuml; &Auml;&Ouml;&Uuml; &deg;!"$%&/()=?`Q&lt;&gt;@*+~#' ,;.: -_ &euro; &copy;&trade;&para;</div>
+
+<div class="test bodi">bodi BODI 0123456789 :-_ &copy;</div>
+
+</body>
+</html>

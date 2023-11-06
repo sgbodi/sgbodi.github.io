@@ -1,0 +1,724 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../inc/style.css"/>
+<script src="../inc/jquery-2.2.1.js"></script>
+<script src="../inc/jquery-DateFormat.js"></script>
+<script src="../inc/utils.js"></script>
+<script src="../inc/thetestcode.js"></script>
+<title>ASLP - Fragen</title>
+<style type="text/css">
+/* nothing */
+</style>
+<script>
+/* nothing */
+</script>
+</head>
+<body>
+<h1>ASLP - Fragen</h1>
+
+<section id="settings">
+<p>Fragenkatalog und Anzahl Testfragen auswählen und loslegen. (jeweils genau 1 Richtige Antworten je Frage. Zeitvorgabe: 10 Minuten.)</p>
+<div class="cfgblock" id="cfgBSG">
+<h6>Fragenkatalog</h6>
+<ul>
+<li><input type="checkbox" class="iBSG" id="chkBronze" qFrom="1" qTo="30" checked="checked"/><label for="chkBronze">Stufe 1 - Bronze</label><span class="hint">(30 Fragen)</span></li>
+<li><input type="checkbox" class="iBSG" id="chkSilber" qFrom="31" qTo="60"/><label for="chkSilber">Stufe 2 - Silber</label><span class="hint">(+30 Fragen)</span></li>
+<li><input type="checkbox" class="iBSG" id="chkGold"   qFrom="61" qTo="100"/><label for="chkGold">Stufe 3 - Gold</label><span class="hint">(+40 Fragen)</span></li>
+</ul>
+</div>
+
+<div class="cfgblock" id="cfgQueryCnt">
+<h6>Anzahl Fragen</h6>
+<ul class="lQCount">
+<li><input type="radio" name="rbQCount" class="rbQCount" id="rbQCa" value="5"><label for="rbQCa">5</label></li>
+<li><input type="radio" name="rbQCount" class="rbQCount" id="rbQCb" value="10" checked="checked"><label for="rbQCb">10</label></li>
+<li><input type="radio" name="rbQCount" class="rbQCount" id="rbQCc" value="15"><label for="rbQCd">15</label></li>
+<li><input type="radio" name="rbQCount" class="rbQCount" id="rbQCd" value="20"><label for="rbQCd">20</label></li>
+<li><input type="radio" name="rbQCount" class="rbQCount" id="rbQCe" value="40"><label for="rbQCe">40</label></li>
+<li><input type="radio" name="rbQCount" class="rbQCount" id="rbQCf" value="40"><label for="rbQCf">60</label></li>
+<li><input type="radio" name="rbQCount" class="rbQCount" id="rbQCg" value="1000"><label for="rbQCg">alle</label></li>
+</ul>
+</div>
+
+<div class="cfgblock" id="cfgShuffle">
+<h6>Weitere Optionen</h6>
+<ul>
+<li><input type="checkbox" id="chkShuffleAnsw"/><label for="chkShuffleAnsw">Antwortenreihenfolge mischen</label></li>
+</ul>
+</div>
+
+<div class="cfgblock">
+<button type="button" id="btnstart">Start</button>
+</div>
+</section>
+
+
+<h2 id="resulttitle" style="display:none;">Fertig! Ergebnisse im Detail. (Für neuen Test Seite neu laden)</h2>
+
+<span class="quelle hideonly">Quelle: Richtlinie Atemschutzleistungsprüfung RL 5.2/16-2007 vom 24.03.2022</span>
+
+<section id="thequestions">
+
+<!-- Replacements
+***1: frage
+
+FIND: ^([0-9]{1})(\)\s*)(.*)$
+REPL: <article id="q00$1" class="question"><h4><span class="qnr">$1$2</span>$3</h4>
+
+FIND: ^([0-9]{2})(\)\s*)(.*)$
+REPL: <article id="q0$1" class="question"><h4><span class="qnr">$1$2</span>$3</h4>
+
+FIND: ^([0-9]{3})(\)\s*)(.*)$
+REPL: <article id="q$1" class="question"><h4><span class="qnr">$1$2</span>$3</h4>
+
+***2: antworten
+FIND: ^\s*([abcd])(\))(\s*)(.*)
+REPL: <p class="answ x$1 nco"><span class="abc">$1$2 </span>$4</p>
+
+***3: leerzeilen
+FIND: \r\n\r\n
+REPL: \r\n</article>\r\n\r\n
+-->
+
+
+<!-- FRAGEN -->
+<h2>Prüfungsfragen Stufe 1</h2>
+<h3>ATMUNG</h3>
+
+<article id="q001" class="question"><h4><span class="qnr">1) </span>Woraus setzt sich die Umgebungsluft (Einatemluft) zusammen?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>17% Sauerstoff, 78% Stickstoff, 4,00% Kohlenstoffdioxid, 1,00% Edelgas</p>
+<p class="answ xb cor"><span class="abc">b) </span>21% Sauerstoff, 78% Stickstoff, 0,04% Kohlenstoffdioxid, 0,96% Edelgase</p>
+<p class="answ xc nco"><span class="abc">c) </span>21% Stickstoff, 78% Sauerstoff, 0,04% Kohlenstoffdioxid, 0,96% Edelgase</p>
+</article>
+
+<article id="q002" class="question"><h4><span class="qnr">2) </span>Wie kann eine Atemkrise ausgelöst werden?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Durch eine falsche Atemtechnik (z.B. durch flaches, hastiges Atmen) bzw. Sauerstoffmangel</p>
+<p class="answ xb nco"><span class="abc">b) </span>Gar nicht</p>
+<p class="answ xc nco"><span class="abc">c) </span>Durch zu viel Feuchtigkeit in der Atemluft</p>
+</article>
+
+<article id="q003" class="question"><h4><span class="qnr">3) </span>Wie lange kann ein Mensch ohne Sauerstoff (Atmung), ohne Schäden zu bekommen, auskommnen?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Ca. 3 Minuten</p>
+<p class="answ xb nco"><span class="abc">b) </span>Ca. 5 Minuten</p>
+<p class="answ xc nco"><span class="abc">c) </span>Ca. 1,5 Minuten</p>
+</article>
+
+<article id="q004" class="question"><h4><span class="qnr">4) </span>Aus welchen Bestandteilen setzt sich die ausgeatmete Atemluft zusammen?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>14% Sauerstoff, 81% Stickstoff, 4,00% Edelgase, 1% Kohlenstoffdioxid</p>
+<p class="answ xb nco"><span class="abc">b) </span>20% Sauerstoff, 79% Kohlenstoffdioxid, 1% Stickstoff</p>
+<p class="answ xc cor"><span class="abc">c) </span>17% Sauerstoff, 78% Stickstoff, 4,04 % Kohlenstoffdioxid, 0,96% Edelgase</p>
+</article>
+
+<article id="q005" class="question"><h4><span class="qnr">5) </span>Welches Atemgift wirkt auf die äußere Atmung?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Kohlenstoffdioxid (CO2)</p>
+<p class="answ xb nco"><span class="abc">b) </span>Kohlenstoffmonoxid (CO)</p>
+<p class="answ xc nco"><span class="abc">c) </span>Blausäuredämpfe (HCN)</p>
+</article>
+
+<h3>GERÄTEKUNDE</h3>
+
+<article id="q006" class="question"><h4><span class="qnr">6) </span>Was sind Atemschutzgeräte?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Geräte, mit welchen man sich vor heißer Einatemluft schützt</p>
+<p class="answ xb cor"><span class="abc">b) </span>Geräte, welche es ermöglichen, sich in nicht atembarer Atmosphäre aufzuhalten</p>
+<p class="answ xc nco"><span class="abc">c) </span>Geräte, für Gas- und Taucheinsätze</p>
+</article>
+
+<article id="q007" class="question"><h4><span class="qnr">7) </span>Welche Schutzwirkung hat der Pressluftatmer?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Schützt den Träger vor Pressluft</p>
+<p class="answ xb cor"><span class="abc">b) </span>Schütz den Träger vor Atemgiften und Sauerstoffmangel</p>
+<p class="answ xc nco"><span class="abc">c) </span>Kann Schadstoffe aus der Umgebungsluft filtern</p>
+</article>
+
+<article id="q008" class="question"><h4><span class="qnr">8) </span>Wann muss man Atemmasken reinigen und überprüfen?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Nach jeder Verwendung</p>
+<p class="answ xb nco"><span class="abc">b) </span>Monatlich</p>
+<p class="answ xc nco"><span class="abc">c) </span>4-mal im Jahr</p>
+</article>
+
+<article id="q009" class="question"><h4><span class="qnr">9) </span>Welcher Sauerstoffgehalt ist für den Einsatz von Filtergeräten bzw. Brandfluchthauben notwendig?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>mindestens 15Vol% Sauerstoff</p>
+<p class="answ xb cor"><span class="abc">b) </span>mindestens 17Vol% Sauerstoff</p>
+<p class="answ xc nco"><span class="abc">c) </span>mindestens 21Vol% Sauerstoff</p>
+</article>
+
+<article id="q010" class="question"><h4><span class="qnr">10) </span>Welche Prüfungen müssen nach einem Atemschutzeinsatz durchgeführt werden, um den Pressluftatmer wieder zu verwenden?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Sichtprüfung, Flaschenventilprüfung, Überprüfung der Warneinrichtung</p>
+<p class="answ xb nco"><span class="abc">b) </span>Überprüfung des Flaschendruckes und Sichtprüfung, Warnsignal Funktionstest</p>
+<p class="answ xc cor"><span class="abc">c) </span>Sichtprüfung (NSG, Haltegurt), Flaschendruckprüfung, Hochdruckdichtprüfung, Flaschenventilprüfung, Warnsignal Funktionstest.</p>
+</article>
+
+<article id="q011" class="question"><h4><span class="qnr">11) </span>Wie viel Druckabfall ist bei der Hochdruckdichtprüfung innerhalb einer Minute maximal zulässig?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>20 bar</p>
+<p class="answ xb cor"><span class="abc">b) </span>10 bar</p>
+<p class="answ xc nco"><span class="abc">c) </span>gar keiner</p>
+</article>
+
+<article id="q012" class="question"><h4><span class="qnr">12) </span>Welchen Mindestdruck müssen Pressluftatmer (PA) haben um einsatzbereit zu sein?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Mind. 200 bar beim 200 bar PA und mind. 300 bar beim 300 bar PA</p>
+<p class="answ xb cor"><span class="abc">b) </span>Mind. 180 bar beim 200 bar PA und mind. 270 bar beim 300 bar PA</p>
+<p class="answ xc nco"><span class="abc">c) </span>Mind. 150 bar beim 200 bar PA und mind. 250 bar beim 300 bar PA</p>
+</article>
+
+<article id="q013" class="question"><h4><span class="qnr">13) </span>Welcher Druck ist für den Rückweg des AS-Trupps erforderlich?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Mindestens 60 bar</p>
+<p class="answ xb cor"><span class="abc">b) </span>Rückmarschdruck=doppelter Vormarschdruckabfall bzw. spätestens beim Ansprechen des akustischen Warnsignals.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Mindestens 50 bar</p>
+</article>
+
+<article id="q014" class="question"><h4><span class="qnr">14) </span>Welchen Zweck erfüllen Fluchthauben?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Sie dienen zum Retten von Personen aus sicheren Bereichen durch leicht verrauchte (unsichere) Bereiche mit mind. 17Vol% Sauerstoff ins Freie bzw. sicheren Brandabschnitt</p>
+<p class="answ xb nco"><span class="abc">b) </span>Sie verhindern das unkontrollierte Flüchten von Personen bei Brandeinsätzen</p>
+<p class="answ xc nco"><span class="abc">c) </span>Sie dienen dem Einsatzleiter als Erkundungsgerät, welcher der beste Fluchtweg ist</p>
+</article>
+
+<article id="q015" class="question"><h4><span class="qnr">15) </span>Wozu dient ein Notsignalgeber ?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Zur Kennzeichnung des Atemschutzgeräteträgers</p>
+<p class="answ xb nco"><span class="abc">b) </span>Zur Warnung des Trupps, das eine aufgefundene Person bereits tot sein könnte</p>
+<p class="answ xc cor"><span class="abc">c) </span>Zur manuellen oder automatischen Abgabe von Notsignalen</p>
+</article>
+
+<article id="q016" class="question"><h4><span class="qnr">16) </span>Wozu dient ein Atemschutz-Außenüberwachungsgerät(AÜwG)?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Zur Kontrolle der Bewegung der Atemschutztrupps</p>
+<p class="answ xb cor"><span class="abc">b) </span>Zur Kontrolle der Einsatzzeit (Resteinsatzzeit) und Registrierung der AS-Geräteträger</p>
+<p class="answ xc nco"><span class="abc">c) </span>Zur Kontrolle des Rettungstrupps</p>
+</article>
+
+<h3>ALLGEMEINE FRAGEN</h3>
+
+<article id="q017" class="question"><h4><span class="qnr">17) </span>Wann darf ein Atemschutzeinsatz begonnen werden?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Wenn es der Einsatzleiter befiehlt</p>
+<p class="answ xb cor"><span class="abc">b) </span>Wenn ein Rettungstrupp vor Ort ist bzw. sich auf der Anfahrt befindet</p>
+<p class="answ xc nco"><span class="abc">c) </span>Wenn mind. zwei Atemschutzgeräteträger verfügbar sind</p>
+</article>
+
+<article id="q018" class="question"><h4><span class="qnr">18) </span>Wie oft muss jeder Atemschutzträger eine Atemschutzübung machen?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>2-mal im Jahr</p>
+<p class="answ xb nco"><span class="abc">b) </span>1-mal monatlich</p>
+<p class="answ xc nco"><span class="abc">c) </span>1-mal in 3 Jahren</p>
+</article>
+
+<article id="q019" class="question"><h4><span class="qnr">19) </span>Wie sichert sich ein Atemschutztrupp seinen Rückmarschweg?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Mittels Bandschlingen</p>
+<p class="answ xb nco"><span class="abc">b) </span>Durch markieren mit Leuchtmittel</p>
+<p class="answ xc cor"><span class="abc">c) </span>Mittels Schlauchleitung oder Leine</p>
+</article>
+
+<article id="q020" class="question"><h4><span class="qnr">20) </span>Aus wie vielen Personen besteht in der Regel ein Atemschutztrupp?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Drei</p>
+<p class="answ xb nco"><span class="abc">b) </span>Vier</p>
+<p class="answ xc nco"><span class="abc">c) </span>Zwei</p>
+</article>
+
+<article id="q021" class="question"><h4><span class="qnr">21) </span>Dürfen Pressluftflaschen vollkommen entleert werden?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Nein, ein Restdruck muss erhalten bleiben</p>
+<p class="answ xb nco"><span class="abc">b) </span>Ja, um die Luftqualität sicher zu stellen</p>
+<p class="answ xc nco"><span class="abc">c) </span>Nein, der Druck in der Flasche muss min. 50 bar betragen</p>
+</article>
+
+<article id="q022" class="question"><h4><span class="qnr">22) </span>Wie verhält sich der Atemschutztrupp, wenn bei einem Atemschutzgeräteträger (AGT) die Restdruckwarneinrichtung (akustisches Warnsignal) anspricht?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Der Truppführer wird informiert und der Auftrag weiter ausgeführt.</p>
+<p class="answ xb cor"><span class="abc">b) </span>Der gesamte Trupp tritt nach Meldung an den GK den Rückzug an.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Der Geräteträger bei dem das Warnsignal angesprochen hat, tritt den Rückzug sofort an.</p>
+</article>
+
+<article id="q023" class="question"><h4><span class="qnr">23) </span>Welche Aufgabe hat der Atemschutz-Truppführer (ASTRF) unter anderen?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Funkgerät bedienen, Strahlrohr führen, Türen öffnen, Leinen tragen, Verletzte Personen reanimieren</p>
+<p class="answ xb cor"><span class="abc">b) </span>Regelmäßige Druckkontrolle und rechtzeitiger Antritt des Rückzuges</p>
+<p class="answ xc nco"><span class="abc">c) </span>Er ist für das Funktionieren der Geräte im Trupp verantwortlich</p>
+</article>
+
+<article id="q024" class="question"><h4><span class="qnr">24) </span>Was versteht man unter Atemschutztauglichkeit?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Positiver AKL-Test, ÖFAST (jährlich absolviert) und Tagesverfassung des AGT</p>
+<p class="answ xb nco"><span class="abc">b) </span>Aus Pressluftatmer, Träger und Material</p>
+<p class="answ xc nco"><span class="abc">c) </span>Es gibt keine Voraussetzungen zur Tauglichkeit</p>
+</article>
+
+<article id="q025" class="question"><h4><span class="qnr">25) </span>Warum ist ein Pressluftatmer mit einer Restdruckwarneinrichtung ausgestattet?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Um sich akustisch bei null Sicht bemerkbar machen zu können.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Um erinnert zu werden, dass dem Gruppenkommandanten der Flaschendruck über Funk mitgeteilt werden muss.</p>
+<p class="answ xc cor"><span class="abc">c) </span>Um auf den zu Ende gehenden Atemluftvorrat aufmerksam zu machen.</p>
+</article>
+
+<article id="q026" class="question"><h4><span class="qnr">26) </span>Welche Aufgabe hat der Atemschutz-Rettungstrupp beim Atemschutzeinsatz?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Er muss für Notfälle bereitstehen und kann, wenn notwending unterstützende Tätigkeiten durchführen.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Er ist für die Rettung von Personen über Leitern zuständig</p>
+<p class="answ xc nco"><span class="abc">c) </span>Er ist für die Reserveluft zuständig</p>
+</article>
+
+<article id="q027" class="question"><h4><span class="qnr">27) </span>Wo meldet sich der, aus dem Einsatz kommende Atemschutztrupp zurück?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Beim Atemschutzsammelplatz.</p>
+<p class="answ xb cor"><span class="abc">b) </span>Beim dem für den Atemschutzeinsatz zuständigen Gruppenkommandanten mit der Außenüberwachung.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Bei der Einsatzleitung.</p>
+</article>
+
+<article id="q028" class="question"><h4><span class="qnr">28) </span>Was ist zu tun, wenn durch die Maske oder Lungenautomat Rauch eindringt?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Luft anhalten und Einsatzstelle sofort verlassen.</p>
+<p class="answ xb cor"><span class="abc">b) </span>Wenn vorhanden, mittels Zuschuss(Dusch)knopf am Lungenautomaten Atemluft zuschießen und Einsatzstelle sofort gemeinsam (ganzer AS-Trupp) verlassen.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Lungenautomat abschrauben und wechseln.</p>
+</article>
+
+<article id="q029" class="question"><h4><span class="qnr">29) </span>In welchen Abständen ist der ÖFAST in der Feuerwehr durchzuführen?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Jährlich (+ 5 Monate)</p>
+<p class="answ xb nco"><span class="abc">b) </span>einmal im Jahr (+/- 4 Monate)</p>
+<p class="answ xc cor"><span class="abc">c) </span>Jährlich (+/- 3 Monate)</p>
+</article>
+
+<article id="q030" class="question"><h4><span class="qnr">30) </span>Wie ist die Allgemeine Vorgehensweise in Räumen mit wenig bzw. NULL Sicht?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Seitenkriechgang, der Wand entlang, Rauchabzug herstellen, Rückzug sichern, zusammenbleiben.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Einzeln eintreten, Rauchabzug herstellen.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Im Trupp zusammenbleiben und der Wand entlang aufrecht gehen, Rauchabzug herstellen.</p>
+</article>
+
+<h2>Ergänzungen für Stufe 2</h3>
+<h3>ATMUNG:</h3>
+
+<article id="q031" class="question"><h4><span class="qnr">31) </span>Was ist Kohlenstoffmonoxid für ein Atemgift?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Erstickend wirkendes Gift</p>
+<p class="answ xb cor"><span class="abc">b) </span>Blut und Nervengift</p>
+<p class="answ xc nco"><span class="abc">c) </span>Reiz- und Ätzgift</p>
+</article>
+
+<article id="q032" class="question"><h4><span class="qnr">32) </span>Wie kann man Sauerstoffmangel in der Umgebungsluft erkennen?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>nur mit speziellen Meßgeräten</p>
+<p class="answ xb nco"><span class="abc">b) </span>an der blauen Färbung der Luft</p>
+<p class="answ xc nco"><span class="abc">c) </span>durch Kerzen Schnelltests</p>
+</article>
+
+<article id="q033" class="question"><h4><span class="qnr">33) </span>Woran erkennt man eine gesunde Atemtechnik?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Am ruhigen Aus- und Einatmen</p>
+<p class="answ xb nco"><span class="abc">b) </span>An der langsamen Brustatmung</p>
+<p class="answ xc nco"><span class="abc">c) </span>An der beständigen, pausenlosen Atmung unter Beachtung der Atemgymnastik</p>
+</article>
+
+<article id="q034" class="question"><h4><span class="qnr">34) </span>Welche Folge kann eine gestörte Atmung (Atemkrise) hervorrufen?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Rauschzustände</p>
+<p class="answ xb cor"><span class="abc">b) </span>Lebensgefahr</p>
+<p class="answ xc nco"><span class="abc">c) </span>Depressionen</p>
+</article>
+
+<article id="q035" class="question"><h4><span class="qnr">35) </span>Was geschieht mit der Atemluft in der Lunge ?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Teile des Stickstoffes werden vom Blut aufgenommen, Kohlendioxid abtransportiert</p>
+<p class="answ xb cor"><span class="abc">b) </span>Sauerstoff wird vom Blut aufgenommen, Kohlenstoffdioxid vom Blut in die Lunge (Gasaustausch) abgegeben</p>
+<p class="answ xc nco"><span class="abc">c) </span>Kohlendioxid (CO2) wird an das Blut übertragen, um das Atemzentrum anzuregen.</p>
+</article>
+
+<article id="q036" class="question"><h4><span class="qnr">36) </span>In welcher Form können atemschädliche Stoffe in der Luft vorkommen?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Nur gasförmig</p>
+<p class="answ xb cor"><span class="abc">b) </span>Als Partikel, Gase und Dämpfe</p>
+<p class="answ xc nco"><span class="abc">c) </span>Nur in Kombination mit Aerosolen</p>
+</article>
+
+<article id="q037" class="question"><h4><span class="qnr">37) </span>Wann muss der Atemschutzgeräteträger zur ärztlichen Nachuntersuchung (AKL-Test)?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>jährlich</p>
+<p class="answ xb cor"><span class="abc">b) </span>Bis zum 40. Lebensjahr alle 5 Jahre, zwischen 40. und 50. Lebensjahr alle 3 Jahre, ab dem 50. Lebensjahr alle 2 Jahre oder nach schwerer Erkrankung.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Alle 3 Jahre bis zum 40. Lebensjahr, alle 2 Jahre bis zum 60 Lebensjahr, danach jährlich</p>
+</article>
+
+<article id="q038" class="question"><h4><span class="qnr">38) </span>Wie kann man einer Atemkrise entgegenwirken?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>durch schnelle Atemzüge</p>
+<p class="answ xb cor"><span class="abc">b) </span>durch ruhiges, tiefes Ein- und Ausatmen</p>
+<p class="answ xc nco"><span class="abc">c) </span>durch Drücken des Zuschussknopfes am Lungenautomaten</p>
+</article>
+
+<article id="q039" class="question"><h4><span class="qnr">39) </span>Wie viel Luft veratmet ein AGT durchschnittlich bei einem Atemschutzeinsatz?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>20 - 30 Liter/min</p>
+<p class="answ xb nco"><span class="abc">b) </span>60 – 90 Liter/min</p>
+<p class="answ xc cor"><span class="abc">c) </span>40 – 50 Liter/min.</p>
+</article>
+
+<h3>GERÄTEKUNDE:</h3>
+
+<article id="q040" class="question"><h4><span class="qnr">40) </span>Was hat auf jedem Pressluftatmer (PA) zumindest montiert zu sein?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>ein Notsignalgeber</p>
+<p class="answ xb nco"><span class="abc">b) </span>Keile und Bandschlingen</p>
+<p class="answ xc nco"><span class="abc">c) </span>ein Haltegurt mit zusätzlichen Karabinern</p>
+</article>
+
+<article id="q041" class="question"><h4><span class="qnr">41) </span>Warum werden bei der Feuerwehr Kombinationsfilter verwendet?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Weil er in Kombination mit der Atemschutzmaske Schutz vor mehreren Gasen bietet.</p>
+<p class="answ xb cor"><span class="abc">b) </span>Damit ein Schutz vor Gasen und Partikeln gegeben ist.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Kombinationsfilter sind mit allen Masken kompatibel.</p>
+</article>
+
+<article id="q042" class="question"><h4><span class="qnr">42) </span>Schützen Filtergeräte gegen Sauerstoffmangel?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Ja</p>
+<p class="answ xb nco"><span class="abc">b) </span>Bedingt</p>
+<p class="answ xc cor"><span class="abc">c) </span>Nein</p>
+</article>
+
+<article id="q043" class="question"><h4><span class="qnr">43) </span>Wogegen schützt die Brandfluchthaube?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>gegen Brandrauch ausschließlich Kohlenstoffmonoxid</p>
+<p class="answ xb nco"><span class="abc">b) </span>Nur gegen Kohlenstoffmonoxid</p>
+<p class="answ xc cor"><span class="abc">c) </span>Kurzzeitig gegen verschiedene Atemgifte einschließlich Kohlenstoffmonoxid.</p>
+</article>
+
+<article id="q044" class="question"><h4><span class="qnr">44) </span>Welcher Bauteil der Atemmaske sorgt für die Sprechverbindung nach außen?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Die Sprechmembrane.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Das Mikrofon bei Funkmasken.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Der Hohlraum in der Innenmaske.</p>
+</article>
+
+<article id="q045" class="question"><h4><span class="qnr">45) </span>Welches Ventil ist für die Dichtheit der Maske besonders wichtig?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Das Einatemventil.</p>
+<p class="answ xb cor"><span class="abc">b) </span>Das Ausatemventil.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Das Steuerventil.</p>
+</article>
+
+<article id="q046" class="question"><h4><span class="qnr">46) </span>Wer führt die Pflege der Atemmasken nach der Verwendung durch?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Der Atemschutzwart mit Unterstützung der Geräteträger</p>
+<p class="answ xb nco"><span class="abc">b) </span>Der Geräteträger</p>
+<p class="answ xc nco"><span class="abc">c) </span>Der Gerätemeister, der Atemschutzwart überwacht und prüft.</p>
+</article>
+
+<article id="q047" class="question"><h4><span class="qnr">47) </span>Warum sind Atemmasken mit einer Innenmaske ausgestattet?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Zur Erleichterung der Wartung</p>
+<p class="answ xb nco"><span class="abc">b) </span>Um eine angenehme Luftführung zu erreichen</p>
+<p class="answ xc cor"><span class="abc">c) </span>Zur Verkleinerung des Totraumes, das Beschlagen der Sichtscheibe wird weitgehend verhindert.</p>
+</article>
+
+<article id="q048" class="question"><h4><span class="qnr">48) </span>Wieviele AS-Trupps können mit einer Außenüberwachungsbox (Modell Steiermark) zeitgleich überwacht werden?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Zwei</p>
+<p class="answ xb cor"><span class="abc">b) </span>Drei</p>
+<p class="answ xc nco"><span class="abc">c) </span>Vier</p>
+</article>
+
+<article id="q049" class="question"><h4><span class="qnr">49) </span>Welche Funktion hat der Lungenautomat?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Abgabe der Atemluft an den Atemschutzgeräteträger entsprechend seines Bedarfs.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Er verringert den Widerstand beim Atmen.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Er reduziert den Luftdruck von Hochdruck auf Niederdruck.</p>
+</article>
+
+<article id="q050" class="question"><h4><span class="qnr">50) </span>Darf mit einem Pressluftatmer getaucht werden?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Nur bis fünf Meter.</p>
+<p class="answ xb cor"><span class="abc">b) </span>Nein.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Ja, aber nur mit Tauchmaske.</p>
+</article>
+
+<article id="q051" class="question"><h4><span class="qnr">51) </span>Wer darf defekte Atemschutzgeräte und Atemmasken reparieren?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Die Hersteller und autorisierte Atemschutzwerkstätten (z.B.: LFV Steiermark)</p>
+<p class="answ xb nco"><span class="abc">b) </span>Der Atemschutzwart der Feuerwehr</p>
+<p class="answ xc nco"><span class="abc">c) </span>Jeder mit Atemschutzgeräteträger Lehrgang</p>
+</article>
+
+<article id="q052" class="question"><h4><span class="qnr">52) </span>Welches Volumen/ Druck können Pressluftflaschen für Atemschutzgeräte haben?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>4 Liter/ 200 bar; 6 Liter / 300 bar; 6,8 Liter /300 bar</p>
+<p class="answ xb nco"><span class="abc">b) </span>2 Liter /300 bar; 4 Liter /300 bar; 15 Liter / 200 bar</p>
+<p class="answ xc nco"><span class="abc">c) </span>6,8 Liter / 200 bar; 6 Liter / 200 bar; 4 Liter / 300 bar</p>
+</article>
+
+<h3>ALLGEMEINE FRAGEN:</h3>
+
+<article id="q053" class="question"><h4><span class="qnr">53) </span>Kann ein (Voll)Bartträger als Atemschutzgeräteträger eingesetzt werden?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Ja, mit Überdruckmaske.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Es ist egal ob man eine Vollbart hat.</p>
+<p class="answ xc cor"><span class="abc">c) </span>Nein, der dichte Sitz der Atemmaske ist nicht mehr gewährleistet.</p>
+</article>
+
+<article id="q054" class="question"><h4><span class="qnr">54) </span>Im Trupp löst ein Notsignalgeber (Notsignalgeber) aus. Was ist sofort zu tun?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Einsatzauftrag abschließen und danach um das Signal kümmern.</p>
+<p class="answ xb cor"><span class="abc">b) </span>Einsatzauftrag abbrechen, Kontakt mit dem Truppmitglied aufnehmen, Hilfe leisten.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Trupp teilen, ein Mitglied kümmert sich um das Notsignal, das andere setzt den Einsatzauftrag fort.</p>
+</article>
+
+<article id="q055" class="question"><h4><span class="qnr">55) </span>Wann muss der GK als Außenüberwacher mit dem Atemschutztrupp Funkkontakt aufnehmen?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Alle 5 Minuten um den Flaschendruck zu kontrollieren</p>
+<p class="answ xb cor"><span class="abc">b) </span>Bei Einsatzbeginn(Funkprobe); gegebenenfalls bei 20, immer bei 10 und 0 Minuten Resteinsatzzeit.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Zu Einsatzbeginn und bei Einsatz Ende</p>
+</article>
+
+<article id="q056" class="question"><h4><span class="qnr">56) </span>Wer trägt für die Außenüberwachung des AS-Trupps die Verantwortung?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Der Gruppenkommandant</p>
+<p class="answ xb nco"><span class="abc">b) </span>Der Leiter des Atemschutzsammelplatzes</p>
+<p class="answ xc nco"><span class="abc">c) </span>Der Atemschutzbeauftragte der Feuerwehr</p>
+</article>
+
+<article id="q057" class="question"><h4><span class="qnr">57) </span>Mindestalter für Atemschutzgeräteträger?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>20 Jahre one Grundausbildung</p>
+<p class="answ xb nco"><span class="abc">b) </span>16 Jahre mit Grundausbildung</p>
+<p class="answ xc cor"><span class="abc">c) </span>vollendetes 18. Lebensjahr</p>
+</article>
+
+<article id="q058" class="question"><h4><span class="qnr">58) </span>Was ist vor Beendigung eines Atemschutzeinsatzes (z.B. Brandeinsatz) zu beachten?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Alarmierung des Atemschutzbereichsbeauftragten</p>
+<p class="answ xb nco"><span class="abc">b) </span>Organisation von Speisen, Getränken und Rauchwaren</p>
+<p class="answ xc cor"><span class="abc">c) </span>Eine Grobdekontamination ist noch am Einsatzort durchzuführen.</p>
+</article>
+
+<article id="q059" class="question"><h4><span class="qnr">59) </span>Warum soll jedes mit Atemschutz ausgestattete Feuerwehrfahrzeug mit einem Außenüberwachungsgerät ausgestattet sein?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Damit jeder Atemschutztrupp von Beginn des Einsatzes an überwacht werden kann</p>
+<p class="answ xb nco"><span class="abc">b) </span>Damit ausreichend Reservegeräte vorhanden sind</p>
+<p class="answ xc nco"><span class="abc">c) </span>Damit eine Funkverbindung zu den eingesetzten Atemschutztrupps aufgebaut werden kann.</p>
+</article>
+
+<article id="q060" class="question"><h4><span class="qnr">60) </span>Wann hat ein in Bereitschaft stehender AS-Rettungstrupp die Atemmaske nicht aufgesetzt?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Wenn sich nur ein Angriffstrupp im Gefahrenbereich befindet</p>
+<p class="answ xb cor"><span class="abc">b) </span>Wenn durch die Witterung oder die Technik der Atemmaske die Sichtscheibe innen beschlägt.</p>
+<p class="answ xc nco"><span class="abc">c) </span>wenn eine Lagerung in der Maskedose möglich ist</p>
+</article>
+
+<h2>Ergänzungen für Stufe 3</h2>
+<h3>GERÄTEKUNDE:</h3>
+
+<article id="q061" class="question"><h4><span class="qnr">61) </span>Was steht im oberen Teil einer orangen Warndafel (Gefahrguttransport)?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Gefahrnummer.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Stoffnummer.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Gefährliche Güternummer.</p>
+</article>
+
+<article id="q062" class="question"><h4><span class="qnr">62) </span>Was bedeutet ein “X” vor der Gefahrennummer?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Es bezeichnet, das der Stoff in gefährlicher Weise mit Wasser reagiert.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Der Stoff kann mit Wasser in Berührung kommen.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Der Stoff darf nicht mit Luft in Berührung kommen.</p>
+</article>
+
+<article id="q063" class="question"><h4><span class="qnr">63) </span>Wann müssen Pressluftflaschen aus Stahl von einem autorisierten Sachverständigen überprüft werden?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Alle 5 Jahre</p>
+<p class="answ xb nco"><span class="abc">b) </span>Alle 6 Jahre</p>
+<p class="answ xc cor"><span class="abc">c) </span>Alle 10 Jahre.</p>
+</article>
+
+<article id="q064" class="question"><h4><span class="qnr">64) </span>Zu welcher Schutzstufe gehört der gasdichte Chemikalienschutzanzug?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Schutzstufe 1</p>
+<p class="answ xb cor"><span class="abc">b) </span>Schutzstufe 3</p>
+<p class="answ xc nco"><span class="abc">c) </span>Schutzstufe 2</p>
+</article>
+
+<article id="q065" class="question"><h4><span class="qnr">65) </span>Wie groß ist die Mindestabsperrgrenze bei Gefahrguteinsätzen?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>mindestens 10 Meter</p>
+<p class="answ xb cor"><span class="abc">b) </span>30 - 60 Meter</p>
+<p class="answ xc nco"><span class="abc">c) </span>maximal 30 Meter</p>
+</article>
+
+<article id="q066" class="question"><h4><span class="qnr">66) </span>Welche Atemluftversorgung benötigt man bei gasdichten Chemiekalienschutzanzügen?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Pressluftatmer mit akustischer Restdruckwarnung, Zusätzlich sind Druckluftschlauchgeräte möglich.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Pressluftatmer mit manueller Restdruckwarnung und doppelten Pressluftflaschen</p>
+<p class="answ xc nco"><span class="abc">c) </span>Fremdversorgung mit Restdruckwarnung</p>
+</article>
+
+<article id="q067" class="question"><h4><span class="qnr">67) </span>Wann ist ein Schutzanzug der Schutzstufe 3 zu überprüfen?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Nach jeder Verwendung, ansonsten alle 5 Jahre</p>
+<p class="answ xb nco"><span class="abc">b) </span>Nur nach Einsätzen, zusätzlich alle 2 Jahre</p>
+<p class="answ xc nco"><span class="abc">c) </span>Halbjährlich</p>
+</article>
+
+<article id="q068" class="question"><h4><span class="qnr">68) </span>In welchen Zeitabständen müssen Pressluftatmer einer Grundüberholung unterzogen werden?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Jährlich</p>
+<p class="answ xb cor"><span class="abc">b) </span>Alle 6; 9 bzw. 10 Jahre, je nach Hersteller und Type</p>
+<p class="answ xc nco"><span class="abc">c) </span>Nach persönlichem Dafürhalten des Atemschutzwartes</p>
+</article>
+
+<article id="q069" class="question"><h4><span class="qnr">69) </span>Auf welchen Mitteldruck (bar) reduziert der Druckminderer durchschnittlich den Hochdruck beim Pressluftatmer?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>5 bis 9 bar</p>
+<p class="answ xb nco"><span class="abc">b) </span>4 bis 8 bar</p>
+<p class="answ xc cor"><span class="abc">c) </span>6 bis 9 bar</p>
+</article>
+
+<h3>ALLGEMEINE FRAGEN:</h3>
+
+<article id="q070" class="question"><h4><span class="qnr">70) </span>Wem kann dem Gruppenkommandanten die Bedienung des  Außenüberwachungsgerätes (AÜwG) delegieren?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Seinem Melder oder Maschinisten</p>
+<p class="answ xb nco"><span class="abc">b) </span>Dem Melder des Einsatzleiters</p>
+<p class="answ xc nco"><span class="abc">c) </span>Dem Strahlrohrführer</p>
+</article>
+
+<article id="q071" class="question"><h4><span class="qnr">71) </span>Ein ASTRF hört nach 25 Minuten Einsatzzeit das akustische Warnsignal des ASTRM2. Die Kontrolle der Manometer ergibt beim ASTRF 70 bar, ASTRM1 110 bar und ASTRM2 85 bar. Was ist zu tun?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Der Trupp zieht sich zurück, weil der ASTRF einen Manometerdefekt beim Pressluftatmer des ASTRM2 vermutet.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Der Trupp verbleibt im Einsatz, weil die Manometerkontrolle einen ausreichenden Luftvorrat bei allen Geräten gezeigt hat.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Der Trupp setzt den Einsatz fort, bis bei allen Geräten das akustische Warnsignal anspricht.</p>
+</article>
+
+<article id="q072" class="question"><h4><span class="qnr">72) </span>Wer ordnet den Beginn des Druckbelüftungsvorganges an?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Der Atemschuttruppführer (ASTRF).</p>
+<p class="answ xb nco"><span class="abc">b) </span>Der Einsatzleiter</p>
+<p class="answ xc nco"><span class="abc">c) </span>Der Gruppenkommandant</p>
+</article>
+
+<article id="q073" class="question"><h4><span class="qnr">73) </span>Wofür steht die “GAMS“ Regel der Feuerwehr?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Gefahr erkennen, Absichern, Menschenrettung, Schutzausrüstung anlegen.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Gefahr erkennen, Absperren, Messen, Spezialkräfte anfordern.</p>
+<p class="answ xc cor"><span class="abc">c) </span>Gefahr erkennen, Absperren, Menschenrettung, Spezialkräfte anfordern.</p>
+</article>
+
+<article id="q074" class="question"><h4><span class="qnr">74) </span>Was bedeutet die “3A Regel“?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Abschirmung groß halten, Abstand verkürzen, Aufenthaltszeit verlängern</p>
+<p class="answ xb cor"><span class="abc">b) </span>möglichst gute Abschirmung, großen Abstand und kurze Aufenthaltszeit</p>
+<p class="answ xc nco"><span class="abc">c) </span>Abschirmung entfernen, Abstand verkürzen, Aufenthaltszeit kurz halten</p>
+</article>
+
+<article id="q075" class="question"><h4><span class="qnr">75) </span>Ein Angriffstrupp entscheided in eine Raum, gefüllt mit dichtem und heißem Brandrauch vorzugehen. Was ist zu tun?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Den heißen Brandrauch sofort mit Sprühstrahl bis zur Rauchuntergrenze kühlen</p>
+<p class="answ xb nco"><span class="abc">b) </span>Mit Vollstrahl den Brandherd zu treffen versuchen</p>
+<p class="answ xc nco"><span class="abc">c) </span>Einige Minuten warten, wie sich die Lage entwickelt</p>
+</article>
+
+<article id="q076" class="question"><h4><span class="qnr">76) </span>Welche Umstände schließen einen Innenangriff aus?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Das Gebäude ist nicht stromlos geschalten</p>
+<p class="answ xb cor"><span class="abc">b) </span>Wenn die mögliche Gefährdung des AS-Trupps nicht dafür spricht (Einsturz- und Explosionsgefahr usw.)</p>
+<p class="answ xc nco"><span class="abc">c) </span>Im Gebäude befinden sich keine Menschen mehr</p>
+</article>
+
+<article id="q077" class="question"><h4><span class="qnr">77) </span>Wer gibt den Befehl für den Einsatz desAtemschutztrupp in der Löschgruppe?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Der Gruppenkommandant</p>
+<p class="answ xb nco"><span class="abc">b) </span>Der Einsatzleiter</p>
+<p class="answ xc nco"><span class="abc">c) </span>Der Leiter des Atemschutzsammelplatzes</p>
+</article>
+
+<article id="q078" class="question"><h4><span class="qnr">78) </span>Welche Farbkennzeichnung am Flaschenhals haben Acetylengasflaschen in Österreich?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Weiß</p>
+<p class="answ xb nco"><span class="abc">b) </span>Rot</p>
+<p class="answ xc cor"><span class="abc">c) </span>Kastanienbraun</p>
+</article>
+
+<article id="q079" class="question"><h4><span class="qnr">79) </span>Mit welcher Farbe sind am Flaschenhals Druckgasflaschen für brennbare Gase, außer Acetylen, gekennzeichnet?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Weiß</p>
+<p class="answ xb cor"><span class="abc">b) </span>Rot</p>
+<p class="answ xc nco"><span class="abc">c) </span>Kastanienbraun</p>
+</article>
+
+<article id="q080" class="question"><h4><span class="qnr">80) </span>Wieviel von seiner Tragfähigkeit verliert ein Stahlträger bei einer Temperatur von 700 Grad Celsius?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Nichts</p>
+<p class="answ xb nco"><span class="abc">b) </span>25 %</p>
+<p class="answ xc cor"><span class="abc">c) </span>Zwei Drittel.</p>
+</article>
+
+<article id="q081" class="question"><h4><span class="qnr">81) </span>Womit kann eine explosionsfähige Atmosphäre am Einsatzort nachgewiesen werden?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Mit einem Explosimeter.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Mit einem Kompressor.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Mit einer Waage.</p>
+</article>
+
+<article id="q082" class="question"><h4><span class="qnr">82) </span>Worüber gibt die Stoffnummer (UN-Nummer) Auskunft?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Name des Fahrzeuges.</p>
+<p class="answ xb nco"><span class="abc">b) </span>über die Menge.</p>
+<p class="answ xc cor"><span class="abc">c) </span>Kennzeichnung des Stoffes.</p>
+</article>
+
+<article id="q083" class="question"><h4><span class="qnr">83) </span>Was ist beim Einsatz eines Atemschutztrupps auf dem Außenüberwachungsgerät zu notieren bzw. zu beachten?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Einsatzleiter, Gruppenkommandant, Zeiten, Flaschendrücke, Rettungstrupp, Einsatzadresse.</p>
+<p class="answ xb cor"><span class="abc">b) </span>Verantwortlicher, Einsatzabschnitt, Namen der Truppmitglieder,Geräteart, Einsatzbeginn bzw. Ende, Soll-Rückzugsdruck, niedriegste Flaschendrücke, Befehl, Lagemeldungen, Rettungstrupp und dessen niedrigsten Flaschendruck.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Sammelplatzleiter, Einsatzleiter, Namen der Truppmitglieder, Lagemeldungen, Rettungstrupp, Zeiten, Flaschendrücke.</p>
+</article>
+
+<article id="q084" class="question"><h4><span class="qnr">84) </span>Was ist beim Erkennen von „Gefahr in Verzug“ zu tun?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Sofortiger Rückzug der Trupps, Meldung beim Gruppenkommandanten.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Gruppenkommandanten fragen, ob Rückzug durchgeführt werden soll.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Einsatzleiter bescheid geben.</p>
+</article>
+
+<article id="q085" class="question"><h4><span class="qnr">85) </span>Welcher Sicherheitsabstand ist bei Brandbekämpfung im Bereich elektrischer Anlagen mit Spannungen bis 1000 Volt beim Einsatz von C- Mehrzweckstrahlrohren und reinem Wasser einzuhalten?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Sprühstrahl 1m - Vollstrahl 5m</p>
+<p class="answ xb nco"><span class="abc">b) </span>Sprühstrahl 5m - Vollstrahl 1m</p>
+<p class="answ xc nco"><span class="abc">c) </span>Sprühstrahl 5m - Vollstrahl 10m</p>
+</article>
+
+<article id="q086" class="question"><h4><span class="qnr">86) </span>Welches Löschmittel darf bei Fettbränden nicht eingesetzt werden?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Fettbrandlöscher</p>
+<p class="answ xb cor"><span class="abc">b) </span>Wasser</p>
+<p class="answ xc nco"><span class="abc">c) </span>Löschpulver</p>
+</article>
+
+<article id="q087" class="question"><h4><span class="qnr">87) </span>Welche Strahlrohreinstellung wird vorzugsweise bei Innenangriffen eingesetzt?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Vollstrahl</p>
+<p class="answ xb nco"><span class="abc">b) </span>Spülen</p>
+<p class="answ xc cor"><span class="abc">c) </span>Sprühstrahl</p>
+</article>
+
+<article id="q088" class="question"><h4><span class="qnr">88) </span>Welche Druckzonen bilden sich bei einer Verbrennung?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>gefährliche und ungefährliche Zone</p>
+<p class="answ xb cor"><span class="abc">b) </span>Neutrale Zone, Überdruckzone, Unterdruckzone</p>
+<p class="answ xc nco"><span class="abc">c) </span>Grüne, gelbe und rote Zone</p>
+</article>
+
+<article id="q089" class="question"><h4><span class="qnr">89) </span>Wann ist die komplette Einsatzbekleidung „E1“ zu tragen?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Bei jedem Einsatz und jeder Übung mit Brandgefahr</p>
+<p class="answ xb nco"><span class="abc">b) </span>Bei jedem Einsatz</p>
+<p class="answ xc nco"><span class="abc">c) </span>nur beim Atemschutzeinsatz</p>
+</article>
+
+<article id="q090" class="question"><h4><span class="qnr">90) </span>Wie kann man Säuredämpfe niederschlagen?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>mit Feuerpatschen</p>
+<p class="answ xb cor"><span class="abc">b) </span>mit Wassersprühstrahl</p>
+<p class="answ xc nco"><span class="abc">c) </span>mit Laugenpulver</p>
+</article>
+
+<article id="q091" class="question"><h4><span class="qnr">91) </span>Welche Stoffe neigen zu Selbstentzündung?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Phosphor, in Öl getränkte Putzwolle, feuchtes Heu</p>
+<p class="answ xb nco"><span class="abc">b) </span>Benzin, Benzol, Kerosin, Teer, Bitumen</p>
+<p class="answ xc nco"><span class="abc">c) </span>Seifen, Putzmittel, Bleichmittel</p>
+</article>
+
+<article id="q092" class="question"><h4><span class="qnr">92) </span>Welche Prüfungen hat der Atemschutzwart monatlich durchzuführen?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Sichtkontrolle, ob Beladung in Ordnung ist</p>
+<p class="answ xb cor"><span class="abc">b) </span>Kontrolle der Atemschutzgeräte (PA, Notsignalgeber, Atemmaske und Filter), den Druck der Reserveflaschen, das Außenüberwachungsgerät, die Wärmebildkamera.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Sicht-, Dicht- und Funktionsprüfung</p>
+</article>
+
+<article id="q093" class="question"><h4><span class="qnr">93) </span>Bei welchem Brand ist die Kohlenstoffmonoxidbildung besonders groß?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>bei Bränden in geschlossenen Räumen</p>
+<p class="answ xb nco"><span class="abc">b) </span>bei Metallbränden</p>
+<p class="answ xc nco"><span class="abc">c) </span>bei Waldbränden</p>
+</article>
+
+<article id="q094" class="question"><h4><span class="qnr">94) </span>Welche Bekleidung ist für die Menschenrettung bei Einsätzen mit gefährlichen Stoffen im Freien zumindest zu tragen?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Chemikalienschutzanzug Stufe 2</p>
+<p class="answ xb nco"><span class="abc">b) </span>Einsatzoverall mit Filtergerät</p>
+<p class="answ xc cor"><span class="abc">c) </span>Schutzbekleidung für die Brandbekämpfung, Einmalhandschuhe, darüber Chemikalienschutzhandschuhe und Chemikalien beständige Sicherheitsstiefel, Feuerschutzhaube</p>
+</article>
+
+<article id="q095" class="question"><h4><span class="qnr">95) </span>Welche Bekleidung ist bei Einsätzen am Brandgeschehen zu tragen?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Hitzeschutzanzug nach EN 1486</p>
+<p class="answ xb nco"><span class="abc">b) </span>Einsatzoverall</p>
+<p class="answ xc cor"><span class="abc">c) </span>Schutzbekleidung für die Brandbekämpfung nach EN 469</p>
+</article>
+
+<article id="q096" class="question"><h4><span class="qnr">96) </span>Was versteht man unter Einsatzabschnitt?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>zeitliche Einteilung in Erkundungsphase, Verteidigungs- und Angriffsphase</p>
+<p class="answ xb cor"><span class="abc">b) </span>Teil einer Einsatzstelle, der von der Einsatzleitung einer Einheit zugewiesen wird</p>
+<p class="answ xc nco"><span class="abc">c) </span>Bereiche an einer Einsatzstelle, in der Feuerwehren eines BFV arbeiten</p>
+</article>
+
+<article id="q097" class="question"><h4><span class="qnr">97) </span>Welche giftigen Stoffe und Gefahren gehen von brennenden PVC aus?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Salzsäuredämpfe, Bildung heißer Tropfen</p>
+<p class="answ xb nco"><span class="abc">b) </span>Sichtbehinderung durch weißen Rauch und grelle Flammen</p>
+<p class="answ xc nco"><span class="abc">c) </span>Unsichtbare Flammen</p>
+</article>
+
+<article id="q098" class="question"><h4><span class="qnr">98) </span>Von wievielen Personen darf eine 2-teilige Schiebeleiter gleichzeitig bestiegen werden?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Max. 1 Person</p>
+<p class="answ xb cor"><span class="abc">b) </span>Von 1 Person, ausgenommen bei Menschenrettung von 2 Personen (= Retter und zu rettende Person)</p>
+<p class="answ xc nco"><span class="abc">c) </span>Max. 3 Personen</p>
+</article>
+
+<article id="q099" class="question"><h4><span class="qnr">99) </span>Gegen welches gefährliche Atemgift schützt ein Filter vom Typ „ABEK2-P3“ nicht?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Kohlenstoffmonoxid</p>
+<p class="answ xb nco"><span class="abc">b) </span>Blausäuredämpfe</p>
+<p class="answ xc nco"><span class="abc">c) </span>Chlorgas</p>
+</article>
+
+<article id="q100" class="question"><h4><span class="qnr">100) </span>Welche Maßnahmen sind bei Druckgefäßen im Brandgeschehen zu treffen?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Druckgefäße bergen und im Freien in ein Kühlbecken ablegen</p>
+<p class="answ xb nco"><span class="abc">b) </span>Kennzeichnung ablesen, um Inhalt zu indentifizieren</p>
+<p class="answ xc cor"><span class="abc">c) </span>Aus sicherer Deckung heraus, kühlen</p>
+</article>
+<!-- FRAGEN ENDE -->
+
+</section> <!-- end thequestions -->
+
+<footer id="quelle" class="hideontest">Richtlinie Atemschutzleistungsprüfung RL 5.2/16-2007 vom 24.03.2022</footer>
+
+
+<footer id="testcontrols">
+	<span class="testinfo" id="qXofY">Frage 0/0.</span>
+	<span class="testinfo" id="qTime">Zeit 00:00:00.</span>
+	<span class="testinfo" id="qCorrect">0/0 richtig (0%).</span>
+	<button type="button" id="showresult">Auswerten</button>
+	<button type="button" id="next">Nächste Frage</button>
+</footer>
+
+<footer id="bybodi">Erstellt von Robert Bodenlenz <span id="bodilogo">bodi</span></footer>
+<footer id="disclaimer" class="hideontest">Trotz gewissenhafter Ausarbeitung alle Angaben ohne Gewähr.</footer>
+</body>
+

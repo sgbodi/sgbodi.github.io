@@ -1,0 +1,81 @@
+@font-face {
+  font-family:bodi;
+  src: url(./bodi.ttf);
+}
+
+@font-face {
+  font-family:brankovic;
+  src: url(./brankovic.ttf);
+}
+
+@font-face {
+  font-family:greatescape;
+  src: url(./TheGreatEscapeBold.ttf);
+}
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('./fafonts/fontawesome-webfont.eot?v=4.5.0');
+  src: url('./fafonts/fontawesome-webfont.eot?#iefix&v=4.5.0') format('embedded-opentype'), url('./fafonts/fontawesome-webfont.woff2?v=4.5.0') format('woff2'), url('./fafonts/fontawesome-webfont.woff?v=4.5.0') format('woff'), url('./fafonts/fontawesome-webfont.ttf?v=4.5.0') format('truetype'), url('./fafonts/fontawesome-webfont.svg?v=4.5.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body{
+  font-family:"Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Lucida", Verdana, Arial, sans-serif;
+  background-color:#fff;
+  padding-bottom:4em; /*space for testcontrols overlay */
+}
+
+h1,h2,h3,h4,h5,h6 {
+  color:#33b; 
+  margin-top:0.1em;
+}
+/* --------------------- */
+
+
+h1#title {
+	font-family: greatescape, Arial;
+	text-transform:uppercase;
+	font-size:4em;
+	color:#99cc33;
+	background-color:white;
+	border-bottom:1px solid #99cc33;
+}
+
+
+
+#bybodi { margin-top:2em; text-align:right; background-color:#eee; color:#ccc; font-size:80%; }
+#bodilogo { display:inline-block; font-family: bodi, Arial; text-transform:uppercase; color:#ccc;}
+#bodilogo:hover { color:#000; background-color:#99cc33;}
+
+#disclaimer { font-size:80%; color:#ccc; }
+
+
+/*Main menu*/
+nav {
+	max-width:35em;
+	padding:0;
+}
+nav ul {
+	padding:0;
+}
+nav li {
+	list-style-type:none;
+	padding:0;
+}
+nav li a {
+	display:block;
+	background-color:#33b;
+	padding:0.3em;
+	margin:0.1em;
+	color:#fff;
+	text-decoration:none;
+}
+
+nav li a:hover {
+	background-color:#66b;
+	text-decoration:underline;
+}
+
+/*----------------------------*/

@@ -1,0 +1,508 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../inc/style.css"/>
+<script src="../inc/jquery-2.2.1.js"></script>
+<script src="../inc/jquery-DateFormat.js"></script>
+<script src="../inc/utils.js"></script>
+<script src="../inc/thetestcode.js"></script>
+<title>SANLP - Fragen</title>
+<style type="text/css">
+/* nothing */
+</style>
+<script>
+/* nothing */
+</script>
+</head>
+<body>
+<h1>SAN-Leistungsprüfung - Fragen</h1>
+
+<section id="settings">
+<p>Fragenkatalog und Anzahl Testfragen auswählen und loslegen. (Multiple-choice Test, 1-4 Richtige Antworten je Frage.)</p>
+<div class="cfgblock" id="cfgBSG">
+<h6>Fragenkatalog</h6>
+<ul>
+<li><input type="checkbox" class="iBSG" id="chkBronze" qFrom="1" qTo="40" checked="checked"/><label for="chkBronze">Stufe 1 - Bronze</label><span class="hint">(40 Fragen)</span></li>
+<li><input type="checkbox" class="iBSG" id="chkSilber" qFrom="41" qTo="50" checked="checked"/><label for="chkSilber">Stufe 2 - Silber</label><span class="hint">(+10 Fragen)</span></li>
+<li><input type="checkbox" class="iBSG" id="chkGold" qFrom="51" qTo="60"/><label for="chkGold">Stufe 3 - Gold</label><span class="hint">(+10 Fragen)</span></li>
+</ul>
+</div>
+
+<div class="cfgblock" id="cfgQueryCnt">
+<h6>Anzahl Fragen</h6>
+<ul class="lQCount">
+<li><input type="radio" name="rbQCount" class="rbQCount" id="rbQCa" value="10"                  /><label for="rbQCa">10</label></li>
+<li><input type="radio" name="rbQCount" class="rbQCount" id="rbQCb" value="20" checked="checked"/><label for="rbQCb">20</label></li>
+<li><input type="radio" name="rbQCount" class="rbQCount" id="rbQCc" value="30"                  /><label for="rbQCc">30</label></li>
+<li><input type="radio" name="rbQCount" class="rbQCount" id="rbQCd" value="40"                  /><label for="rbQCd">40</label></li>
+<li><input type="radio" name="rbQCount" class="rbQCount" id="rbQCe" value="1000"                /><label for="rbQCe">alle</label></li>
+</ul>
+</div>
+
+<div class="cfgblock" id="cfgShuffle">
+<h6>Weitere Optionen</h6>
+<ul>
+<li><input type="checkbox" id="chkShuffleAnsw"/><label for="chkShuffleAnsw">Antwortenreihenfolge mischen</label></li>
+</ul>
+</div>
+
+<div class="cfgblock">
+<button type="button" id="btnstart">Start</button>
+</div>
+</section>
+
+
+<h2 id="resulttitle" style="display:none;">Fertig! Ergebnisse im Detail. (Für neuen Test Seite neu laden)</h2>
+
+<span class="quelle hideonly">Quelle: Richtlinie Sanitätsleistungsprüfung RL-4.6.1/151-2020 vom 01. April 2022</span>
+
+<section id="thequestions">
+
+
+<!-- FRAGEN -->
+<h2>Prüfungsfragen Bronze/Silber/Gold</h2>
+
+
+<article id="q001" class="question bronze"><h4><span class="qnr">1. </span>In welchem Abstand vom Unfallgeschehen wird bei einem Verkehrsunfall das Warndreieck aufgestellt?</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>Ortsgebiet 10 m (in beiden Richtungen), Landstraße 50 m (in beiden Richtungen), Autobahn/Schnellstraße 100 m</p>
+<p class="answ xb cor"><span class="abc">b.) </span>Ortsgebiet ca. 50 m (in beiden Richtungen), Landstraße ca. 150 m (in beiden Richtungen), Autobahn/Schnellstraße ca. 250 m bis ca. 400 m</p>
+<p class="answ xc nco"><span class="abc">c.) </span>Ortsgebiet 100 m (in beiden Richtungen), Landstraße 200 m (in beiden Richtungen), Autobahn/Schnellstraße 500 m</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Ortsgebiet 25 m (in beiden Richtungen), Landstraße 65 m (in beiden Richtungen), Autobahn/Schnellstraße 150 m</p>
+</article>
+
+<article id="q002" class="question bronze"><h4><span class="qnr">2. </span>Was besagt die Kemler-Nummer?</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>Nummer zur Kennzeichnung des Stoffes</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Allgemeiner Hinweis auf das Gefahrengut</p>
+<p class="answ xc nco"><span class="abc">c.) </span>Chemische Bezeichnung des transportierten Stoffes</p>
+<p class="answ xd cor"><span class="abc">d.) </span>Die Gefährlichkeit eines Stoffes</p>
+</article>
+
+<article id="q003" class="question bronze"><h4><span class="qnr">3. </span>Welche Erste Hilfe Ausrüstung schützt den Helfer vor Infektionen?</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Beatmungstuch</p>
+<p class="answ xb cor"><span class="abc">b.) </span>Einmalhandschuhe</p>
+<p class="answ xc nco"><span class="abc">c.) </span>Taschentuch</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Warnblinkanlage</p>
+</article>
+
+<article id="q004" class="question bronze"><h4><span class="qnr">4. </span>Welche Farben haben die Warntafeln bei Gefahrenguttransporten?</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>Blau</p>
+<p class="answ xb cor"><span class="abc">b.) </span>Orange mit schwarzer Umrandung</p>
+<p class="answ xc nco"><span class="abc">c.) </span>Rot</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Gelb</p>
+</article>
+
+<article id="q005" class="question bronze"><h4><span class="qnr">5. </span>Nennen Sie Möglichkeiten einer raschen Rettung aus der Gefahrenzone (Crash-Rettung)?</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Rautekgriff</p>
+<p class="answ xb cor"><span class="abc">b.) </span>Wegziehen</p>
+<p class="answ xc nco"><span class="abc">c.) </span>Ast-Trage</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Tragegurt</p>
+</article>
+
+<article id="q006" class="question bronze"><h4><span class="qnr">6. </span>Welche Beschwerden erhärten den Verdacht auf Herzinfarkt?</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>Kopfschmerzen und Ohrensausen</p>
+<p class="answ xb cor"><span class="abc">b.) </span>Atemnot und Engegefühl im Brustbereich</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Stechende und brennende Schmerzen in der Herzgegend</p>
+<p class="answ xd cor"><span class="abc">d.) </span>Vernichtungsgefühl und Todesangst</p>
+</article>
+
+<article id="q007" class="question bronze"><h4><span class="qnr">7. </span>Welche Beschwerden erhärten den Verdacht auf Schlaganfall?</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Halbseitenlähmung, Gesichtslähmung</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Querschnittslähmung</p>
+<p class="answ xc nco"><span class="abc">c.) </span>akute Bauchschmerzen</p>
+<p class="answ xd cor"><span class="abc">d.) </span>Hängender Mundwinkel, Sprachstörung, Bewusstseinsstörung</p>
+</article>
+
+<article id="q008" class="question bronze"><h4><span class="qnr">8. </span>Welche Erste-Hilfe-Maßnahmen sind bei einem Sonnenstich oder Hitzschlag durchzuführen?</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Betroffenen an einen kühlen/schattigen Ort bringen, mit kalten, feuchten Tüchern kühlen</p>
+<p class="answ xb cor"><span class="abc">b.) </span>Lagerung mit erhöhtem Oberkörper, beengende Kleidungsstücke öffnen bzw. entfernen.</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Notruf</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Den Patienten nicht bewegen</p>
+</article>
+
+<article id="q009" class="question bronze"><h4><span class="qnr">9. </span>Nennen Sie die allgemeinen Erste-Hilfe-Maßnahmen bei Knochen- und Gelenksverletzungen.</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Bei offenen Verletzungen keimfreien Verband anlegen und bei Schwellungen kalte Umschläge</p>
+<p class="answ xb cor"><span class="abc">b.) </span>Beengende Kleidungsstücke über der Verletzung lockern</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Ruhigstellung</p>
+<p class="answ xd cor"><span class="abc">d.) </span>Schockbekämpfung/Basismaßnahmen und Notruf</p>
+</article>
+
+<article id="q010" class="question bronze"><h4><span class="qnr">10. </span>Nennen Sie mögliche Kennzeichen bei Verdacht auf eine Wirbelsäulenverletzung.</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Kribbeln oder Gefühllosigkeit in Armen und Beinen</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Krampfanfälle</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Schmerzen im Rückenbereich, gegebenenfalls Unvermögen, sich aufzurichten bzw. die Beine zu bewegen</p>
+<p class="answ xd cor"><span class="abc">d.) </span>Lähmungserscheinungen, Atemnot</p>
+</article>
+
+<article id="q011" class="question bronze"><h4><span class="qnr">11. </span>Woran erkennen Sie eine Knochen- und Gelenksverletzung?</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Schmerzen, Schwellung, Schonhaltung</p>
+<p class="answ xb cor"><span class="abc">b.) </span>abnorme Stellung</p>
+<p class="answ xc nco"><span class="abc">c.) </span>vermehrte Beweglichkeit</p>
+<p class="answ xd cor"><span class="abc">d.) </span>Bewegungsunfähigkeit oder Bewegungseinschränkung</p>
+</article>
+
+<article id="q012" class="question bronze"><h4><span class="qnr">12. </span>In welche Lage ist ein bewusstloser Notfallpatient zu bringen?</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Stabile Seitenlage zum Freihalten der Atemwege</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Auf den Rücken mit überstrecktem Kopf zur Erleichterung der Atmung</p>
+<p class="answ xc nco"><span class="abc">c.) </span>Flache Rückenlagerung und Beine hoch lagern</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Erhöhter Oberkörper - ist die optimale Lagerung</p>
+</article>
+
+<article id="q013" class="question bronze"><h4><span class="qnr">13. </span>Nennen Sie die wichtigsten Lebensfunktionen.</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Bewusstsein, Atmung und Kreislauf</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Essen und Trinken</p>
+<p class="answ xc nco"><span class="abc">c.) </span>Wärmehaushalt, Säure-Basen-Haushalt und Stoffwechsel</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Sauerstoff und Wasser</p>
+</article>
+
+<article id="q014" class="question bronze"><h4><span class="qnr">14. </span>Sie stellen bei einem Patienten die Notfalldiagnose Atem-Kreislauf- Stillstand fest. Nennen Sie die Erste-Hilfe-Maßnahmen (=lebensrettende Sofortmaßnahmen). Sie sind alleine am Notfallort.</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>Zweimalige Beatmung und danach den Notfallpatienten in die stabile Seitenlage bringen</p>
+<p class="answ xb cor"><span class="abc">b.) </span>Notruf - um rasch einen Defibrillator am Notfallort zur Verfügung zu haben, fehlende Atmung und Kreislauf durch Herzdruckmassage und Beatmung ersetzen.</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Zeigt der Notfallpatient während der Durchführung der Maßnahmen eine normale Atmung, so ist er in die stabile Seitenlage zu bringen.</p>
+<p class="answ xd cor"><span class="abc">d.) </span>Diese Maßnahmen werden bis zur Übernahme der Reanimation durch eine Ablösemannschaft oder einen professionellen Rettungsdienst durchgeführt.</p>
+</article>
+
+<article id="q015" class="question bronze"><h4><span class="qnr">15. </span>Welche Symptome zeigt ein "bewusstloser Notfallpatient"?</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>Atemzeichen fehlen, Bewusstsein fehlt</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Atem- und Kreislaufzeichen feststellbar, reagiert auf Ansprechen</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Bewusstsein fehlt, normale Atemzeichen eindeutig feststellbar</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Atemzeichen feststellbar, Bewusstseinslage kann durch den Ersthelfer nicht überprüft werden</p>
+</article>
+
+<article id="q016" class="question bronze"><h4><span class="qnr">16. </span>Wie ist die Kontrolle des Bewusstseins durchzuführen?</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>Notfallpatient massieren, Schmerzreiz setzen</p>
+<p class="answ xb cor"><span class="abc">b.) </span>Notfallpatient laut ansprechen, berühren, sanftes schütteln an der Schulter</p>
+<p class="answ xc nco"><span class="abc">c.) </span>Pupillenreflexe des Patienten mit einer Taschenlampe überprüfen</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Bewusstsein kann nicht festgestellt werden.</p>
+</article>
+
+<article id="q017" class="question bronze"><h4><span class="qnr">17. </span>Wie oft atmet ein Erwachsener (=Atemzüge) pro Minute im Ruhezustand?</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>ca. 25 mal pro Minute</p>
+<p class="answ xb cor"><span class="abc">b.) </span>ca. 12 mal pro Minute</p>
+<p class="answ xc nco"><span class="abc">c.) </span>ca. 40 mal pro Minute</p>
+<p class="answ xd nco"><span class="abc">d.) </span>ca. 5 mal pro Minute</p>
+</article>
+
+<article id="q018" class="question bronze"><h4><span class="qnr">18. </span>Wie oft muss die Herzdruckmassage (Frequenz) pro Minute bei einem Erwachsenen Notfallpatienten durchgeführt werden?</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>100 – 120 mal pro Minute</p>
+<p class="answ xb nco"><span class="abc">b.) </span>etwa 70-mal pro Minute bis max. 90-mal pro Minute</p>
+<p class="answ xc nco"><span class="abc">c.) </span>60-mal pro Minute</p>
+<p class="answ xd nco"><span class="abc">d.) </span>50-mal pro Minute</p>
+</article>
+
+<article id="q019" class="question bronze"><h4><span class="qnr">19. </span>Nennen Sie die Erste-Hilfe-Maßnahmen zur Schockbekämpfung/Basismaßnahmen.</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Rasche, exakte Blutstillung, Wundversorgung, schmerzfreie Lagerung</p>
+<p class="answ xb cor"><span class="abc">b.) </span>Zudecken des Verletzten, Frischluftzufuhr in geschlossenen Räumen, guten Zuspruch und Beruhigen, für Ruhe sorgen</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Öffnen beengender Kleidungsstücke</p>
+<p class="answ xd cor"><span class="abc">d.) </span>Anhalten des Verletzten zu ruhiger, langsamer Atmung</p>
+</article>
+
+<article id="q020" class="question bronze"><h4><span class="qnr">20. </span>Nennen Sie lebensbedrohliche Folgen eines Schocks.</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Kreislaufversagen</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Sehstörungen</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Bewusstlosigkeit</p>
+<p class="answ xd cor"><span class="abc">d.) </span>Tod</p>
+</article>
+
+<article id="q021" class="question bronze"><h4><span class="qnr">21. </span>Nennen Sie die Zeichen eines im Schockzustand befindlichen Notfallpatienten.</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Blasse, kalte, schweißige Haut</p>
+<p class="answ xb cor"><span class="abc">b.) </span>Fieber im septischen Schock möglich</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Teilnahmslosigkeit oder im Gegenteil eine auffallende Unruhe</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Kann nur vom Rettungssanitäter oder Notfallsanitäter festgestellt werden</p>
+</article>
+
+<article id="q022" class="question bronze"><h4><span class="qnr">22. </span>Nennen Sie die Erste-Hilfe-Maßnahmen bei Verätzungen.</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>Kleider nicht entfernen, um nicht die bereits geschädigte Haut weiter zu verletzen</p>
+<p class="answ xb cor"><span class="abc">b.) </span>Weitere Schockbekämpfung/Basismaßnahmen und Notruf</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Sofort mit reinem Wasser intensiv spülen, darauf achten, dass das abfließende Wasser den kürzesten Weg über die Haut nimmt, um unverletzte Körperstellen zu schützen, Selbstschutz beachten!</p>
+<p class="answ xd cor"><span class="abc">d.) </span>Sofort die mit ätzender Substanz getränkte Kleidung entfernen</p>
+</article>
+
+<article id="q023" class="question bronze"><h4><span class="qnr">23. </span>Warum ist eine schwere Verbrennung abhängig von der Ausdehnung lebensbedrohlich?</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>Blutverlust</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Sauerstoffmangel durch Ausfall der Hautatmung</p>
+<p class="answ xc nco"><span class="abc">c.) </span>Auflösung der roten Blutkörperchen (Erythrozyten)</p>
+<p class="answ xd cor"><span class="abc">d.) </span>Verbrennungsschock, Infektionsgefahr</p>
+</article>
+
+<article id="q024" class="question bronze"><h4><span class="qnr">24. </span>Welche Körperstellen sind besonders bei einer Erfrierung gefährdet?</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Körperstellen, die von eng anliegender Bekleidung (z. B. Schuhwerk) umgeben sind</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Rücken</p>
+<p class="answ xc nco"><span class="abc">c.) </span>Körperstellen, die von locker sitzender Bekleidung umgeben sind, da diese wenig Kälteschutz bietet</p>
+<p class="answ xd cor"><span class="abc">d.) </span>Besonders gefährdet sind Körperstellen, die wenig Schutz durch Muskulatur und Gewebe haben (Zehen, Finger, Wangen, Nase und Ohren)</p>
+</article>
+
+<article id="q025" class="question bronze"><h4><span class="qnr">25. </span>Nennen Sie die Erste-Hilfe-Maßnahmen bei einer starken Blutung am Unterschenkel.</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Verletzten niederlegen</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Verletzten stehen lassen</p>
+<p class="answ xc nco"><span class="abc">c.) </span>Der Ersthelfer soll nur den Notruf absetzen</p>
+<p class="answ xd cor"><span class="abc">d.) </span>Bein hoch lagern und manuellen Druck ausüben / Druckverband anlegen</p>
+</article>
+
+<article id="q026" class="question bronze"><h4><span class="qnr">26. </span>Nennen Sie die Gefahren, die bei einer starken Blutung entstehen können.</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Tod</p>
+<p class="answ xb cor"><span class="abc">b.) </span>Kreislaufversagen</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Schockzustand</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Unterkühlung</p>
+</article>
+
+<article id="q027" class="question bronze"><h4><span class="qnr">27. </span>Nennen Sie die Möglichkeiten zur Blutstillung bei einer starken Blutung.</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>Abbindeversuche mit Draht oder Rettungsleine</p>
+<p class="answ xb cor"><span class="abc">b.) </span>Manueller Druck</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Druckverband</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Es ist nur das Hochlagern der verletzten Extremität notwendig</p>
+</article>
+
+<article id="q028" class="question bronze"><h4><span class="qnr">28. </span>Ist Kohlendioxid schwerer oder leichter als Luft bzw. wo kann sich dieses Gas in einem Raum ansammeln?</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Schwerer als Luft und sammelt sich unten an</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Leichter als Luft und sammelt sich oben</p>
+<p class="answ xc nco"><span class="abc">c.) </span>Gleich schwer wie Luft und verteilt sich gleichmäßig</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Schwerer als Luft und sammelt sich oben</p>
+</article>
+
+<article id="q029" class="question bronze"><h4><span class="qnr">29. </span>Erste-Hilfe-Maßnahmen, wenn der vergiftete Notfallpatient reglos ist.</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>Giftentfernung durch provoziertes Erbrechen, Notruf</p>
+<p class="answ xb cor"><span class="abc">b.) </span>Zu Beginn Kontrolle der Lebensfunktionen (Notfallcheck) und wenn nötig, lebensrettende Sofortmaßnahmen durchführen, Notruf</p>
+<p class="answ xc nco"><span class="abc">c.) </span>Vergiftungsinformationszentrale (VIZ) 01 - 406 43 43 befragen</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Patienten in der vorgefundenen Lage belassen, nicht anrühren und sofort den Notruf absetzen</p>
+</article>
+
+<article id="q030" class="question bronze"><h4><span class="qnr">30. </span>Beschreiben Sie das Prinzip der Wundversorgung.</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Fremdkörper in der Wunde belassen</p>
+<p class="answ xb cor"><span class="abc">b.) </span>Kein Anwenden von Salben, Pudern…</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Kein Berühren der Wunde</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Einmalhandschuhe für den Ersthelfer nicht unbedingt notwendig</p>
+</article>
+
+<article id="q031" class="question bronze"><h4><span class="qnr">31. </span>Nennen Sie den richtigen Druckpunkt bei der Herzdruckmassage beim Erwachsenen</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>Mitte des Brustbeines-Verbindungslinie der Brustwarzen</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Anfang der unteren Hälfte des Brustbeines-zwei Fingerbreit davon korrekt abmessen</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Mitte des Brustkorbes</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Obere Hälfte des Brustbeines</p>
+</article>
+
+<article id="q032" class="question bronze"><h4><span class="qnr">32. </span>Wodurch können Verbrennungen bzw. Verbrühungen entstehen?</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Kontakt mit elektrischen Strom</p>
+<p class="answ xb cor"><span class="abc">b.) </span>Heiße Flüssigkeiten bzw. heiße Dämpfe</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Hitzestrahlung</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Flüssig gelagerte Gase</p>
+</article>
+
+<article id="q033" class="question bronze"><h4><span class="qnr">33. </span>Was ist zu tun, wenn die Kleidung einer Person Feuer gefangen hat?</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Betroffene auf den Boden wälzen</p>
+<p class="answ xb cor"><span class="abc">b.) </span>Brennende Person am Weglaufen hindern</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Flammen mit geeigneten Tüchern, Decken oder Kleidungsstücken ersticken</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Gar nichts, da diese Situation eine Gefahr für den Helfer darstellt</p>
+</article>
+
+<article id="q034" class="question bronze"><h4><span class="qnr">34. </span>Nennen Sie die Gefahren bei einer Unterkühlung.</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Bewusstlosigkeit, Atem-Kreislauf-Stillstand infolge Absinkens der Körpertemperatur unter 30 Grad Celsius</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Lebensbedrohliche Steigerung der Atem- und Kreislauffrequenz</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Schock</p>
+<p class="answ xd cor"><span class="abc">d.) </span>Absinken der Körpertemperatur</p>
+</article>
+
+<article id="q035" class="question bronze"><h4><span class="qnr">35. </span>Nennen Sie die Maßnahmen durch den Ersthelfer, wenn der Abtransport eines Unterkühlten in absehbarer Zeit nicht möglich ist (z.B. Gebirge)</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Den Unterkühlten, wenn möglich, an einen windstillen Ort oder in einen warmen Raum (Schutzhütte) bringen. Heiße Getränke verabreichen, warme, trockene Umschläge auf Brust, Bauch und Nacken legen</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Alkohol verabreichen, massieren – frottieren</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Kalte, nasse Kleidung vorsichtig entfernen – in angewärmte Decken hüllen und eventuell Erfrierungen keimfrei verbinden</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Den Unterkühlten ständig bewegen</p>
+</article>
+
+<article id="q036" class="question bronze"><h4><span class="qnr">36. </span>Was ist zu tun, wenn es trotz eines angelegten Druckverbandes weiterhin stark blutet?</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>Auf den Rettungsdienst warten</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Sofort den Druckverband entfernen und einen neuen, festeren anlegen</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Einen zweiten Druckverband darüberlegen oder manuellen Druck ausüben, Wirkung des Druckverbandes ständig kontrollieren</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Kalte Umschläge anlegen</p>
+</article>
+
+<article id="q037" class="question bronze"><h4><span class="qnr">37. </span>Nennen Sie die Erste Hilfe Maßnahmen, die nach einem Biss einer heimischen Giftschlange durchzuführen sind!</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>Verletzten Körperteil ruhig stellen, warme Umschläge auf die Bissstelle, Schockbekämpfung /                Basismaßnahmen</p>
+<p class="answ xb cor"><span class="abc">b.) </span>Verletzten Körperteil ruhig stellen, kalte Umschläge auf die Bissstelle, Schockbekämpfung /Basismaßnahmen, Notruf</p>
+<p class="answ xc nco"><span class="abc">c.) </span>Verletzten Körperteil heftig bewegen lassen, kalte Umschläge auf die Bissstelle, Schockbekämpfung/Basismaßnahmen, Transport durchführen</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Bisswunde aussaugen, Gliedmaßen abbinden, kalte Umschläge auf die Bissstelle, Schockbekämpfung/Basismaßnahmen, Transport ins Krankenhaus veranlassen</p>
+</article>
+
+<article id="q038" class="question bronze"><h4><span class="qnr">38. </span>Welche Gefahren bestehen bei einem Insektenstich?</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Wundinfektion</p>
+<p class="answ xb cor"><span class="abc">b.) </span>Schock</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Akute Erstickungsgefahr durch Schwellung</p>
+<p class="answ xd nco"><span class="abc">d.) </span>HIV (Aids) Infektion</p>
+</article>
+
+<article id="q039" class="question bronze"><h4><span class="qnr">39. </span>Worauf sollte der Feuerwehrsanitäter im Einsatz achten?</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>Ausrüstung vor der Ersten Hilfeleistung kontrollieren</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Hektik verbreiten</p>
+<p class="answ xc nco"><span class="abc">c.) </span>Mit den anderen Feuerwehrsanitätern über die Verletzungen und deren Folgen neben dem Verletzten zu diskutieren</p>
+<p class="answ xd cor"><span class="abc">d.) </span>Ruhiges und kompetentes Arbeiten an der Verletzten Person. Bis weitere Hilfe kommt den Betroffenen beruhigen und beobachten</p>
+</article>
+
+<article id="q040" class="question bronze"><h4><span class="qnr">40. </span>Was bewirkt die Wasseranwendung bei Verbrennungen bzw. wie und wann muss diese durchgeführt werden?</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Verhindert das Nachbrennen im Gewebe und führt zur Schmerzlinderung</p>
+<p class="answ xb cor"><span class="abc">b.) </span>So lange unter reines, fließendes Wasser halten, bis der Schmerz nachlässt</p>
+<p class="answ xc nco"><span class="abc">c.) </span>Führt zu einer erhöhten Infektionsgefahr und Blutvergiftung</p>
+<p class="answ xd cor"><span class="abc">d.) </span>Wenn der Patient fröstelt, die Kühlung stoppen.</p>
+</article>
+
+<h2>Zusätzliche Prüfungsfragen Silber/Gold</h2>
+
+<article id="q041" class="question silber"><h4><span class="qnr">41. </span>Welche Symptome erhärten den Verdacht auf einen Beckenbruch?</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>Kann die Zehen nicht bewegen</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Schmerzen in der Halswirbelsäule</p>
+<p class="answ xc nco"><span class="abc">c.) </span>Gefühllosigkeit in Armen und Beinen</p>
+<p class="answ xd cor"><span class="abc">d.) </span>Instabiles Becken, Schmerzen im Bereich des Beckens und der Beine</p>
+</article>
+
+<article id="q042" class="question silber"><h4><span class="qnr">42. </span>Warum müssen Patienten mit Verdacht auf Wirbelsäulenverletzung besonders sorgfältig versorgt werden?</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>Starke Ohrenschmerzen</p>
+<p class="answ xb cor"><span class="abc">b.) </span>Durch unsachgemäße Rettung oder Lagerung kann es zu weiteren Zusatzverletzungen kommen.</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Bei Verletzung der Halswirbelsäule besteht im Fall einer Rückenmarksschädigung die Gefahr einer Atemstörung bzw. einer bleibenden Querschnittslähmung</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Gefahr von Kreislaufstörungen</p>
+</article>
+
+<article id="q043" class="question silber"><h4><span class="qnr">43. </span>Welchen Grundsatz soll jeder Helfer in einer Gefahrenzone beachten?</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>Reinigen der Gerätschaften noch in der Gefahrenzone</p>
+<p class="answ xb cor"><span class="abc">b.) </span>Selbstschutz geht vor Fremdschutz</p>
+<p class="answ xc nco"><span class="abc">c.) </span>Fremdschutz geht vor Eigenschutz</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Betreten der Gefahrenzone nur mit Atemschutzgerät</p>
+</article>
+
+<article id="q044" class="question silber"><h4><span class="qnr">44. </span>Welcher Sicherheitsabstand ist bei Unfällen mit gefährlichen Gütern einzuhalten?</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>Mindestens 10-20 m</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Mindestens 30-60 m</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Mindestens 60 m</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Mindestens 100 m</p>
+</article>
+
+<article id="q045" class="question silber"><h4><span class="qnr">45. </span>Beschreiben Sie die Technik der Herzdruckmassage beim Erwachsenen in der Ersten Hilfe!</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Be- und Entlastungsphase sollen gleich lang sein, rhythmische Durchführung der Herzdruckmassage, seitlich vom Notfallpatienten knien</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Möglichst kurze und kräftige Be- und Entlastungsphase zur Erzielung hoher Blutdruckwerte</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Notfallpatienten auf eine harte, unnachgiebige Unterlage legen, Handballen einer Hand auf die Mitte des Brustkorbes legen, ohne mit den Fingern den Brustkorb zu berühren. Handballen der anderen Hand wird darübergelegt.</p>
+<p class="answ xd cor"><span class="abc">d.) </span>Bei gestreckten Armen wird nun ein so starker Druck senkrecht auf das Brustbein ausgeübt, dass dieses 5 - 6 cm niedergedrückt wird. Frequenz der Herzdruckmassage: mind. 100/min. - max. 120/min.</p>
+</article>
+
+<article id="q046" class="question silber"><h4><span class="qnr">46. </span>Sie bedienen einen Defibrillator und das Gerät empfiehlt nach der Analyse die Schockabgabe. Welche Sicherheitsvorkehrungen haben Sie vor dem Elektroschock zu berücksichtigen?</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Der Ersthelfer muss darauf achten, dass niemand den Patienten während der Defibrillation berührt.</p>
+<p class="answ xb cor"><span class="abc">b.) </span>Den Patienten nicht berühren.</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Den Notfallpatienten nicht defibrillieren, wenn er leitend mit dem Ersthelfer (=Anwender des Geräts) oder anderen Helfern verbunden ist.</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Der Ersthelfer berührt während der Schockabgabe den Notfallpatienten, um die Wirkung des Elektroschocks überprüfen zu können.</p>
+</article>
+
+<article id="q047" class="question silber"><h4><span class="qnr">47. </span>Wann dürfen Sie nicht defibrillieren?</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>Es gibt keine Kontraindikationen - Die Defibrillation darf immer durchgeführt werden.</p>
+<p class="answ xb cor"><span class="abc">b.) </span>z.B. im explosionsgefährdeten Bereich</p>
+<p class="answ xc cor"><span class="abc">c.) </span>z.B. Patient liegt auf Eisenbahnschienen</p>
+<p class="answ xd cor"><span class="abc">d.) </span>z.B. Patient liegt in einer Wasserlacke oder auf nassem Untergrund</p>
+</article>
+
+<article id="q048" class="question silber"><h4><span class="qnr">48. </span>Warum werden beim Überstrecken des Kopfes in den Nacken die Atemwege frei?</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>Die Speiseröhre wird voll geöffnet.</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Es wird verhindert, dass der Unterkiefer zurücksinkt und die Atemwege verlegt.</p>
+<p class="answ xc nco"><span class="abc">c.) </span>Da Fremdkörper im Rachen entfernt werden.</p>
+<p class="answ xd cor"><span class="abc">d.) </span>Die zurückgesunkene Zunge entfernt sich von der Rachenhinterwand und die Atemwege werden frei.</p>
+</article>
+
+<article id="q049" class="question silber"><h4><span class="qnr">49. </span>Welche Lagerungsart wird bei einer Bauchverletzung und erhaltenem Bewusstsein angewendet?</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>Stabile Seitenlage</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Bauchlage</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Rückenlage mit angezogenen Beinen (Deckenrolle) und leicht erhöhtem Oberkörper</p>
+<p class="answ xd cor"><span class="abc">d.) </span>Jene Lage, die für den Notfallpatienten am schmerzfreisten ist.</p>
+</article>
+
+<article id="q050" class="question gold"><h4><span class="qnr">50. </span>Wie wird die Mund-zu-Mund-Beatmung durchgeführt?</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>Stofftaschentuch über die Nase des Notfallpatienten legen, der Helfer kniet oberhalb des Kopfes des Notfallpatienten, verschließt mit Daumen und Zeigefinger die Nase und überstreckt den Kopf, der Helfer beatmet über den leicht geöffneten Mund des Notfallpatienten.</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Der Helfer hebt nach der Beatmung seinen Kopf und beobachtet das Ausströmen der Luft aus der Nase des Notfallpatienten durch Sehen der Bewegungen des Kopfes.</p>
+<p class="answ xc nco"><span class="abc">c.) </span>Der Helfer hebt nach der Beatmung seinen Kopf nicht, um das Ausströmen der Luft aus der Lunge des Notfallpatienten an seinen Lippen und seiner Wange zu spüren, der Vorgang wird bei Erwachsenen ca. 10- mal in der Minute wiederholt. Dieser Rhythmus entspricht dem natürlichen Atemrhythmus des Helfers.</p>
+<p class="answ xd cor"><span class="abc">d.) </span>Beatmungsfolie über Mund und Nase des Notfallpatienten legen, der Helfer kniet seitlich vom Kopf des Notfallpatienten, überstreckt den Kopf und verschließt mit Daumen und Zeigefinger die Nase, der Helfer beatmet durch den leicht geöffneten Mund des Notfallpatienten.</p>
+</article>
+
+<h2>Zusätzliche Prüfungsfragen Gold</h2>
+
+<article id="q051" class="question gold"><h4><span class="qnr">51. </span>Nennen Sie die richtigen Maßnahmen bei Rauchgasvergiftung?</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>Möglichst lange nicht atmen</p>
+<p class="answ xb nco"><span class="abc">b.) </span>sofort Erbrechen auslösen</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Notruf über Einsatzleitung / Florianstation / Arzt verständigen</p>
+<p class="answ xd cor"><span class="abc">d.) </span>rasche Sauerstoffgabe, tiefe langsame Atmung, sitzend mit Oberkörper erhöht (ca. 90 Grad)</p>
+</article>
+
+<article id="q052" class="question gold"><h4><span class="qnr">52. </span>Wo kommt Kohlendioxid vor?</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>in Stollen und Brunnenschächten</p>
+<p class="answ xb nco"><span class="abc">b.) </span>laufender Motor in geschlossenen Garagen</p>
+<p class="answ xc cor"><span class="abc">c.) </span>in Gärkellern (von Wein- und Mostkellereien)</p>
+<p class="answ xd cor"><span class="abc">d.) </span>in Jauchegruben</p>
+</article>
+
+<article id="q053" class="question gold"><h4><span class="qnr">53. </span>Woran kann man eine Vergiftung erkennen?</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Bewusstseinsstörung, Erregungs-/Rauschzustände, Übelkeit/Erbrechen</p>
+<p class="answ xb cor"><span class="abc">b.) </span>Hinweis durch Umstände eines Unglücks (regloser Mensch in Garage bei laufendem Motor)</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Hautveränderung, Pupillenveränderung, Atem-/Kreislaufstörung</p>
+<p class="answ xd nco"><span class="abc">d.) </span>zunehmendes Hungergefühl</p>
+</article>
+
+<article id="q054" class="question gold"><h4><span class="qnr">54. </span>Wann muss der Helm auf jeden Fall abgenommen werden?</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Wenn kein Bewusstsein festgestellt werden kann</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Wenn der Notfallpatient bei Bewusstsein ist.</p>
+<p class="answ xc nco"><span class="abc">c.) </span>Wenn der Notfallpatient Bauchschmerzen hat.</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Keinem Verunfallten muss der Helm sofort abgenommen werden.</p>
+</article>
+
+<article id="q055" class="question gold"><h4><span class="qnr">55. </span>Wann muss ein Notfallpatient unbedingt auf den Rücken gedreht werden?</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Wenn er nicht ansprechbar, also bewusstlos ist – um weitere Lebensfunktionen zu kontrollieren.</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Wenn er nicht gerne am Bauch liegt.</p>
+<p class="answ xc nco"><span class="abc">c.) </span>Wenn er Bauchschmerzen hat.</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Jeder Verletzte muss auf den Rücken gedreht werden.</p>
+</article>
+
+<article id="q056" class="question gold"><h4><span class="qnr">56. </span>Nennen Sie die Kennzeichen, die auf eine Quetschung hindeuten lassen.</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Blaurote Verfärbung (Bluterguss)</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Gefühllosigkeit</p>
+<p class="answ xc nco"><span class="abc">c.) </span>Abnorme Stellung</p>
+<p class="answ xd cor"><span class="abc">d.) </span>Schwellung, Schmerzen</p>
+</article>
+
+<article id="q057" class="question gold"><h4><span class="qnr">57. </span>Innerhalb welcher Zeit sollte eine Wunde spätestens vom Arzt versorgt werden?</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>Innerhalb von 2 Stunden</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Innerhalb von 4 Stunden</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Innerhalb von 6 Stunden</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Innerhalb von 24 Stunden</p>
+</article>
+
+<article id="q058" class="question gold"><h4><span class="qnr">58. </span>Wie hoch ist die Puls und die Atemfrequenz eines Erwachsenen im Ruhezustand?</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Puls 60 bis 100 / Atmung 12 bis 15</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Puls 10 bis 12 / Atmung 60 bis 100</p>
+<p class="answ xc nco"><span class="abc">c.) </span>Puls 50 bis 55 / Atmung 5 bis 10</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Puls 120 bis 180 / Atmung 15 bis 30</p>
+</article>
+
+<article id="q059" class="question gold"><h4><span class="qnr">59. </span>Warum kann ein Zeckenbiss gefährlich sein?</h4>
+<p class="answ xa nco"><span class="abc">a.) </span>Übertragung von Tollwut</p>
+<p class="answ xb cor"><span class="abc">b.) </span>Übertragung von anderen Krankheiten (z. B. Borreliose)</p>
+<p class="answ xc cor"><span class="abc">c.) </span>Übertragung von FSME</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Übertragung von Wundstarrkrampf</p>
+</article>
+
+<article id="q060" class="question gold"><h4><span class="qnr">60. </span>Darf der Ersthelfer defibrillieren?</h4>
+<p class="answ xa cor"><span class="abc">a.) </span>Die Defibrillation darf vom Ersthelfer angewendet werden, wenn der AED die Schockabgabe empfiehlt.</p>
+<p class="answ xb nco"><span class="abc">b.) </span>Die Defibrillation darf nur von einem Rettungssanitäter angewendet werden.</p>
+<p class="answ xc nco"><span class="abc">c.) </span>Die Defibrillation darf nur vom Arzt angewendet werden</p>
+<p class="answ xd nco"><span class="abc">d.) </span>Die Defibrillation darf nur angewendet werden, wenn ein Arzt anwesend ist.</p>
+</article>
+<!-- FRAGEN ENDE -->
+
+</section> <!-- end thequestions -->
+
+
+<footer id="quelle" class="hideontest">Richtlinie Sanitätsleistungsprüfung Nr. RL-4.6.1/151 - 2010  vom 01. Juli 2017 </footer>
+
+<footer id="testcontrols">
+	<span class="testinfo" id="qXofY">Frage 0/0.</span>
+	<span class="testinfo" id="qTime">Zeit 00:00:00.</span>
+	<span class="testinfo" id="qCorrect">0/0 richtig (0%).</span>
+	<button type="button" id="showresult">Auswerten</button>
+	<button type="button" id="next">Nächste Frage</button>
+</footer>
+
+<footer id="bybodi">Erstellt von Robert Bodenlenz <span id="bodilogo">bodi</span></footer>
+<footer id="disclaimer" class="hideontest">Trotz gewissenhafter Ausarbeitung alle Angaben ohne Gewähr.</footer>
+</body>
