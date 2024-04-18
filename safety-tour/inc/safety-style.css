@@ -141,7 +141,7 @@ h1,h2,h3,h4,h5,h6 {
 
 /* Test over. result message. */
 .resultmsg { margin:1em; border:.5em solid yellow; padding:1em; background-color:#FFFFE0; font-size:120%; text-align:center; }
-.resultmsg img { display:block; margin:auto; }
+.resultmsg img { display:block; margin:auto; max-width:85%; max-height:85%; }
 #resulttitle { margin-bottom:5em; }
 
 /* --------------------- */
