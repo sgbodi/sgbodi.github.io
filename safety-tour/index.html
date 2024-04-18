@@ -1,0 +1,645 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../inc/style.css"/>
+<link rel="stylesheet" type="text/css" href="./inc/safety-style.css"/>
+<script src="../inc/jquery-2.2.1.js"></script>
+<script src="../inc/jquery-DateFormat.js"></script>
+<script src="./inc/utils.js"></script>
+<script src="./inc/safety-testcode.js"></script>
+<title>Safety On Tour - Sicherheitsfragen</title>
+<style type="text/css">
+/* nothing */
+</style>
+<script>
+/* nothing */
+</script>
+</head>
+<body>
+<h1>Safety On Tour - Sicherheitsfragen<img id="safety-tour-logo" src="./img/Logo_Safety-Tour_RGB.png" /></h1>
+
+
+<section id="settings">
+<p>Teste dein Wissen! Fragenkataloge und Anzahl Fragen auswählen und loslegen.</p>
+<div class="cfgblock" id="cfgBSG">
+<h6>Fragenkatalog</h6>
+<ul>
+<li><input type="checkbox" class="iBSG" id="chkBronze" qFrom="1" qTo="40" checked="checked"/><label for="chkBronze">Fragankatalog ZIVILSCHUTZ</label><span class="hint">(40 Fragen)</span></li>
+<li><input type="checkbox" class="iBSG" id="chkSilber" qFrom="41" qTo="58" checked="checked"/><label for="chkSilber">Fragankatalog VERKEHRSERZIEHUNG</label><span class="hint">(18 Fragen)</span></li>
+<li><input type="checkbox" class="iBSG" id="chkGold"   qFrom="59" qTo="86" checked="checked"/><label for="chkGold">Fragankatalog ERSTE HILFE</label><span class="hint">(28 Fragen)</span></li>
+</ul>
+</div>
+
+<div class="cfgblock" id="cfgQueryCnt">
+<h6>Anzahl Fragen</h6>
+<ul class="lQCount">
+<li><input type="radio" name="rbQCount" class="rbQCount" id="rbQCb" value="10" checked="checked"><label for="rbQCb">10</label></li>
+<li><input type="radio" name="rbQCount" class="rbQCount" id="rbQCd" value="20"><label for="rbQCd">20</label></li>
+<li><input type="radio" name="rbQCount" class="rbQCount" id="rbQCe" value="40"><label for="rbQCe">40</label></li>
+<li><input type="radio" name="rbQCount" class="rbQCount" id="rbQCf" value="40"><label for="rbQCf">60</label></li>
+<li><input type="radio" name="rbQCount" class="rbQCount" id="rbQCg" value="1000"><label for="rbQCg">alle</label></li>
+</ul>
+</div>
+
+<div class="cfgblock" id="cfgShuffle">
+<h6>Weitere Optionen</h6>
+<ul>
+<li><input type="checkbox" id="chkShuffleAnsw"/><label for="chkShuffleAnsw">Antwortenreihenfolge durcheinander</label></li>
+</ul>
+</div>
+
+<div class="cfgblock">
+<button type="button" id="btnstart">Start</button>
+</div>
+</section>
+
+<div id="qres1" class="resultmsg resultmsg1" style="display:none;"><b>Absolut Perfekt!</b> Besser geht's nicht.<img src="./img/gif/welldone.gif"/></div>
+<div id="qres2" class="resultmsg resultmsg2" style="display:none;"><b>Sehr gut!</b> Fast schon wie ein Profi.<img src="./img/gif/dancing.gif"/></div>
+<div id="qres3" class="resultmsg resultmsg3" style="display:none;"><b>Gut gemacht!</b> Nur weiter so. Schaffst du noch mehr?<img src="./img/gif/cheer.gif"/></div>
+<div id="qres4" class="resultmsg resultmsg4" style="display:none;"><b>Nicht schlecht!</b> Üben lohnt sich. Versuche es weiter.<img src="./img/gif/banana.gif"/></div>
+<div id="qres5" class="resultmsg resultmsg5" style="display:none;"><b>Na ja.</b> Du solltest wohl noch etwas üben. Versuchs doch gleich nochmal.<img src="./img/gif/yeay.gif"/></div>
+
+<h3 id="resulttitle" class="testover" style="display:none;">Du hast <span id="qresCorrectCount">x</span> von <span id="qresTotalCount">y</span> Fragen richtig beantwortet (<span id="qresPercent">%</span>) . Ergebnisse im Detail. (Für neuen Test Seite neu laden)</h3>
+
+
+
+<section id="thequestions">
+
+<!-- Replacements
+***1: frage
+
+FIND: ^([0-9]{1})(\)\s*)(.*)$
+REPL: <article id="q00$1" class="question"><h4><span class="qnr">$1$2</span>$3</h4>
+
+FIND: ^([0-9]{2})(\)\s*)(.*)$
+REPL: <article id="q0$1" class="question"><h4><span class="qnr">$1$2</span>$3</h4>
+
+FIND: ^([0-9]{3})(\)\s*)(.*)$
+REPL: <article id="q$1" class="question"><h4><span class="qnr">$1$2</span>$3</h4>
+
+***2: antworten
+FIND: ^\s*([abcd])(\))(\s*)(.*)
+REPL: <p class="answ x$1 nco"><span class="abc">$1$2 </span>$4</p>
+
+***3: leerzeilen
+FIND: \r\n\r\n
+REPL: \r\n</article>\r\n\r\n
+-->
+
+
+<!-- FRAGEN -->
+<h2>Fragankatalog ZIVILSCHUTZ</h2>
+
+<article id="q001" class="question"><h4><span class="qnr">1) </span>Was soll man bei einem Notruf beachten?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Den Anweisungen der Leitstelle folgen.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Körpergröße des Verletzten angeben.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Nach dem Notruf schnell auflegen.</p>
+</article>
+
+<article id="q002" class="question"><h4><span class="qnr">2) </span>Welche Organisation führt Verkehrskontrollen durch?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Rettung</p>
+<p class="answ xb cor"><span class="abc">b) </span>Polizei</p>
+<p class="answ xc nco"><span class="abc">c) </span>Feuerwehr</p>
+</article>
+
+<article id="q003" class="question"><h4><span class="qnr">3) </span>Mit welchem Gerät führt die Polizei Geschwindigkeitskontrollen durch?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Alkomat</p>
+<p class="answ xb nco"><span class="abc">b) </span>Tempomat</p>
+<p class="answ xc cor"><span class="abc">c) </span>Laserpistole</p>
+</article>
+
+<article id="q004" class="question"><h4><span class="qnr">4) </span>Welches Tier leiht dem Schutzweg seinen Namen?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Zwergesel</p>
+<p class="answ xb nco"><span class="abc">b) </span>Zweifingerfaultier</p>
+<p class="answ xc cor"><span class="abc">c) </span>Zebra</p>
+</article>
+
+<article id="q005" class="question"><h4><span class="qnr">5) </span>Muss man die Sicherheitsgurte im Auto auf den Rücksitzen verwenden?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Nein</p>
+<p class="answ xb cor"><span class="abc">b) </span>Ja</p>
+<p class="answ xc nco"><span class="abc">c) </span>Wie man will.</p>
+</article>
+
+<article id="q006" class="question"><h4><span class="qnr">6) </span>Wenn die Sirene 3 Minuten lang heult - über welchen Radiosender erhält man sofort alle wichtigen Informationen?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Radio West.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Radio Grün Weiß.</p>
+<p class="answ xc cor"><span class="abc">c) </span>Ö3, Radio Steiermark, Antenne Steiermark</p>
+</article>
+
+<article id="q007" class="question"><h4><span class="qnr">7) </span>Wann wird die wöchentliche Sirenenprobe durchgeführt?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Sonntag - Mittag.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Freitag - Mittag.</p>
+<p class="answ xc cor"><span class="abc">c) </span>Samstag - Mittag.</p>
+</article>
+
+<article id="q008" class="question"><h4><span class="qnr">8) </span>Wie lange heult die Sirene bei herannahender Gefahr - beim Zivilschutzsignal "WARNUNG"?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>1 Minute.</p>
+<p class="answ xb cor"><span class="abc">b) </span>3 Minuten.</p>
+<p class="answ xc nco"><span class="abc">c) </span>5 Minuten.</p>
+</article>
+
+<article id="q009" class="question"><h4><span class="qnr">9) </span>Wie heult die Sirene beim Zivilschutzsignal "ALARM"?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Unterbrochen.</p>
+<p class="answ xb cor"><span class="abc">b) </span>Auf- und abschwellend.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Immer gleich - als Dauerton</p>
+</article>
+
+<article id="q010" class="question"><h4><span class="qnr">10) </span>Wie lange heult die Sirene beim Zivilschutzsignal "ENTWARNUNG"?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>1 Minute.</p>
+<p class="answ xb nco"><span class="abc">b) </span>3 Minuten.</p>
+<p class="answ xc nco"><span class="abc">c) </span>5 Minuten.</p>
+</article>
+
+<article id="q011" class="question"><h4><span class="qnr">11) </span>Die Erde bebt - ein Erdbeben. Was macht man sofort?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Ins Freie laufen.</p>
+<p class="answ xb cor"><span class="abc">b) </span>Sich unter einen Türstock stellen oder Schutz unter einem Tisch suchen.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Nicht tun und warten was passiert.</p>
+</article>
+
+<article id="q012" class="question"><h4><span class="qnr">12) </span>Wo darf man keine Drachen steigen lassen?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>In der Nähe von Bäumen.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Auf Sportplätzen.</p>
+<p class="answ xc cor"><span class="abc">c) </span>In der Nähe elektrischer Leitungen.</p>
+</article>
+
+<article id="q013" class="question"><h4><span class="qnr">13) </span>Is es gefährlich, bei Gewitter im See zu schwimmen?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Ja.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Nein.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Kommt drauf an.</p>
+</article>
+<!-- Seite2-->
+
+<article id="q014" class="question"><h4><span class="qnr">14) </span>Darf man sich beim Baden in der Wanne föhnen?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Nein.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Ja.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Nur wenn es die Eltern erlauben.</p>
+</article>
+
+<article id="q015" class="question"><h4><span class="qnr">15) </span>Soll man alleine zu einer Bergtour aufbrechen?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Ja.</p>
+<p class="answ xb cor"><span class="abc">b) </span>Nein.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Wenn es schön ist, warum nicht?</p>
+</article>
+
+<article id="q016" class="question"><h4><span class="qnr">16) </span>Welche Rettungsorganisation hilft bei Badeunfällen?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Wasserrettung.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Bergrettung.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Höhlenrettung.</p>
+</article>
+
+<article id="q017" class="question"><h4><span class="qnr">17) </span>Welche Einsatzorganisation hilft bei Wanderunfällen auf den Bergen?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Wasserrettung.</p>
+<p class="answ xb cor"><span class="abc">b) </span>Bergrettung.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Feuerwehr.</p>
+</article>
+
+<article id="q018" class="question"><h4><span class="qnr">18) </span>Welche Altstoffe gehören in die "Gelbe Tonne"?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Metallverpackungen.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Buntglas.</p>
+<p class="answ xc cor"><span class="abc">c) </span>Kunststoffverpackungen.</p>
+</article>
+
+<article id="q019" class="question"><h4><span class="qnr">19) </span>Welche Altstoffe gehören in die "Blaue Tonne"?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Metallverpackungen.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Buntglas.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Kunststoffverpackungen.</p>
+</article>
+
+<article id="q020" class="question"><h4><span class="qnr">20) </span>Wie heißt der Luftschadstoff, der sich jeden Sommer in der Atmosphäre bildet?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Kohlendioxid</p>
+<p class="answ xb cor"><span class="abc">b) </span>Ozon</p>
+<p class="answ xc nco"><span class="abc">c) </span>Wasserstoff</p>
+</article>
+
+<article id="q021" class="question"><h4><span class="qnr">21) </span>Wie entsorgt man Reste von giftigen Haushaltschemikalien?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Sammelstelle für Sondermüll.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Heimlich im Wald.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Man schütted die Reste ins WC.</p>
+</article>
+
+<article id="q022" class="question"><h4><span class="qnr">22) </span>Wie verlässt man ein Gebäude bei Gefahr?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Gar nicht.</p>
+<p class="answ xb cor"><span class="abc">b) </span>Über gekennzeichnete Fluchtwege.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Über die Aufzüge.</p>
+</article>
+
+<article id="q023" class="question"><h4><span class="qnr">23) </span>Darf man bei einem Brand den Lift benützen?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Nein.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Ja.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Nicht alleine.</p>
+</article>
+
+<article id="q024" class="question"><h4><span class="qnr">24) </span>Was macht man, wenn heißes Öl in der Bratpfanne zu brennen beginnt?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Davonlaufen.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Brand mit Wasser löschen.</p>
+<p class="answ xc cor"><span class="abc">c) </span>Deckel auf die Pfanne.</p>
+</article>
+
+<article id="q025" class="question"><h4><span class="qnr">25) </span>Was sollte man tun, wenn während des Kochens das Telefon läutet?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Sich beim Telefonieren beeilen.</p>
+<p class="answ xb cor"><span class="abc">b) </span>Pfanne vom Herd nehmen.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Die Flamme kleiner drehen</p>
+</article>
+
+<article id="q026" class="question"><h4><span class="qnr">26) </span>Was macht man, wenn man sich die Hand verbrannt hat?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Die Hand unter heißes Wasser halten.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Druckverband machen.</p>
+<p class="answ xc cor"><span class="abc">c) </span>Die Hand unter kaltes Wasser halten.</p>
+</article>
+
+<article id="q027" class="question"><h4><span class="qnr">27) </span>Was ist unbedingt zu tun wenn es Brennt?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Laut um Hilfe schreien.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Davonlaufen.</p>
+<p class="answ xc cor"><span class="abc">c) </span>Die Feuerwehr rufen.</p>
+</article>
+
+<article id="q028" class="question"><h4><span class="qnr">28) </span>Bei einer Grillparty will die Grillkohle nicht so richtig brennen. Welche Hilfsmittel soll man verwenden?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Grillanzünder.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Benzin.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Holz.</p>
+</article>
+
+<article id="q029" class="question"><h4><span class="qnr">29) </span>Warum soll man leere Spraydosen nicht ins Feuer werfen?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Weil Metall nicht brennt.</p>
+<p class="answ xb cor"><span class="abc">b) </span>Weil Explosionsgefahr besteht.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Wegen der Geruchsbelästigung.</p>
+</article>
+
+<article id="q030" class="question"><h4><span class="qnr">30) </span>Wenn es im Stiegenhaus brennt und du das Haus nicht mehr verlassen kannst - was machst du bis die Feuerwehr eintrifft?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Unters Bett kriechen.</p>
+<p class="answ xb nco"><span class="abc">b) </span>In die Dusche flüchten.</p>
+<p class="answ xc cor"><span class="abc">c) </span>Mich am Fenster der Feuerwehr bemerkbar machen.</p>
+</article>
+
+<!-- Seite3-->
+
+<article id="q031" class="question"><h4><span class="qnr">31) </span>Mit welcher Farbe sind Schipisten für Anfänger gekennzeichnet?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Rot.</p>
+<p class="answ xb cot"><span class="abc">b) </span>Blau.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Schwarz.</p>
+</article>
+
+<article id="q032" class="question"><h4><span class="qnr">32) </span>Mit welcher Farbe sind Schipisten für ausgezeichnete Schiläufter gekennzeichnet?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Schwarz.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Blau.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Rot.</p>
+</article>
+
+<article id="q033" class="question"><h4><span class="qnr">33) </span>Mit welchem Symbol werden brennbare Stoffe gekennzeichnet?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Totenkopf.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Adler.</p>
+<p class="answ xc cor"><span class="abc">c) </span>Flammensymbol.</p>
+</article>
+
+<article id="q034" class="question"><h4><span class="qnr">34) </span>Mit welchem Symbol werden giftige Chemikalien gekennzeichnet?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Totenkopf.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Adler.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Flammensymbol.</p>
+</article>
+
+<article id="q035" class="question"><h4><span class="qnr">35) </span>Wie lautet die Telefonnummer der Feuerwehr?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>122</p>
+<p class="answ xb nco"><span class="abc">b) </span>112</p>
+<p class="answ xc nco"><span class="abc">c) </span>212</p>
+</article>
+
+<article id="q036" class="question"><h4><span class="qnr">36) </span>Wie lautet der EURO-Notruf?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>123</p>
+<p class="answ xb cor"><span class="abc">b) </span>112</p>
+<p class="answ xc nco"><span class="abc">c) </span>111</p>
+</article>
+
+<article id="q037" class="question"><h4><span class="qnr">37) </span>Wie lautet die Notrufnummer der Bergrettung?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>140</p>
+<p class="answ xb nco"><span class="abc">b) </span>122</p>
+<p class="answ xc nco"><span class="abc">c) </span>144</p>
+</article>
+
+<article id="q038" class="question"><h4><span class="qnr">38) </span>Wie lautet die Notrufnummer der Polizei?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>122</p>
+<p class="answ xb cor"><span class="abc">b) </span>133</p>
+<p class="answ xc nco"><span class="abc">c) </span>221</p>
+</article>
+
+<article id="q039" class="question"><h4><span class="qnr">39) </span>Wie lautet die Notrufnummer der Rettung?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>145</p>
+<p class="answ xb cor"><span class="abc">b) </span>144</p>
+<p class="answ xc nco"><span class="abc">c) </span>146</p>
+</article>
+
+<article id="q040" class="question"><h4><span class="qnr">40) </span>Was ist eines der wichtigsten Anzeichen für Lawinengefahr?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Steinböcke auf der Skipiste.</p>
+<p class="answ xb cor"><span class="abc">b) </span>abgegangene Lawine.</p>
+<p class="answ xc nco"><span class="abc">c) </span>es gibt keine Anzeichen für Lawinengefahr.</p>
+</article>
+
+
+<h2>Fragankatalog VERKEHRSERZIEHUNG</h2>
+
+
+<article id="q041" class="question"><h4><span class="qnr">41) </span>Was sagt dir das rote Licht auf der Verkehrsampel?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Rot ist eine schöne Farbe</p>
+<p class="answ xb cor"><span class="abc">b) </span>"Stopp!"</p>
+<p class="answ xc nco"><span class="abc">c) </span>Es wird gleich grün.</p>
+</article>
+
+<article id="q042" class="question"><h4><span class="qnr">42) </span>Weißt du, wie oft das grüne Licht auf der Verkehrsampel blinkt, bevor es gelb wird?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Gar nicht.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Mehrmals.</p>
+<p class="answ xc cor"><span class="abc">c) </span>Genau 4x.</p>
+</article>
+
+<article id="q043" class="question"><h4><span class="qnr">43) </span>Was bedeutet das gelb blinkende Licht auf der Verkehrsampel?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Ich muss stehenbleiben.</p>
+<p class="answ xb cor"><span class="abc">b) </span>Achtung! Vorsicht! Ich muss genau schauen!</p>
+<p class="answ xc nco"><span class="abc">c) </span>Es wird bald grün.</p>
+</article>
+
+<article id="q044" class="question"><h4><span class="qnr">44) </span>Wie erkennst due eine Fußgängeramel?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>In den Lichtern der Ampel sind Fußgänger zu sehen.</p>
+<p class="answ xb nco"><span class="abc">b) </span>In den Lichtern der Ampel siehst du einen Radfahrer.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Dass die Lichter weiß und hellblau sind.</p>
+</article>
+
+<article id="q045" class="question"><h4><span class="qnr">45) </span>Wenn du zwischen zwei geparkten Autos über die Straße gehen möchstest, worauf musst du achten?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Dass ich nicht schmutzig werde.</p>
+<p class="answ xb cor"><span class="abc">b) </span>Dass ich Blickkontakt mit dem herannahenden Autofahrer aufnehme, bevor ich  über die Straße gehe.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Dass micht kein vorbeifahrendes Auto anspritzt.</p>
+</article>
+
+<!-- Seite 4-->
+
+<article id="q046" class="question"><h4><span class="qnr">46) </span>Der "Zebrastreifen" oder auch "Schutzweg" bedeutet für dich, ...</h4>
+<p class="answ xa cor"><span class="abc">a) </span>dass ich ihn benutzen muss, jedoch Blickkontakt mit den Autofahrern aufnehmen muss, um dann sicher über die Straße gehen zu können.</p>
+<p class="answ xb nco"><span class="abc">b) </span>dass ich dort über die Straße laufen darf, ohne links oder rechts zu schauen.</p>
+<p class="answ xc nco"><span class="abc">c) </span>dass die Autofahrer sowieso vor jedem Zebrastreifen stehen bleiben.</p>
+</article>
+
+<article id="q047" class="question"><h4><span class="qnr">47) </span>Was ziehts du an, damit du von anderen Verkehrsteilnehmern in der Dunkelheit besser gesehen wirst?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Ich ziehe meine schöne neue schwarze Jacke an.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Ich ziehe meine schöne neue schwarze Jacke mit hellen Punkten an.</p>
+<p class="answ xc cor"><span class="abc">c) </span>Ich ziehe eine Warnweste mit reflektierenden Strefen über meine schöne schwarze Jacke an.</p>
+</article>
+
+<article id="q048" class="question"><h4><span class="qnr">48) </span>Auf welcher Seit des Autos steigst due ein bzw. aus?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Auf der Gehsteigseite.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Auf der Seite, wo ich schneller drinnen oder draußen bin.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Auf der Seite, wo ich sitze.</p>
+</article>
+
+<article id="q049" class="question"><h4><span class="qnr">49) </span>Wenn du am Gehsteig unterwegs bist, sollst du ...</h4>
+<p class="answ xa cor"><span class="abc">a) </span>dich nicht ablenken lassen (Handy, Kopfhörer, Freunde, usw.)</p>
+<p class="answ xb nco"><span class="abc">b) </span>dich, wann immer du möchstest, hinsetzen.</p>
+<p class="answ xc nco"><span class="abc">c) </span>ganz, ganz langsam gehen.</p>
+</article>
+
+<article id="q050" class="question"><h4><span class="qnr">50) </span>Du fährst im Auto mit - was ist wichtig?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Deine Spielekonsole.</p>
+<p class="answ xb cor"><span class="abc">b) </span>Die passende Sitzunterlage fr dich und dass Anschnallen des Sicherheitsgurtes.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Gute Musik.</p>
+</article>
+
+<article id="q051" class="question"><h4><span class="qnr">51) </span>Du wirst mit dem Auto von der Schule abgeholt. Wo soll die Person, die dich abholt warten?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Vor der Klasse.</p>
+<p class="answ xb cor"><span class="abc">b) </span>Auf dem Gehsteig direkt vor der Schule.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Im Auto.</p>
+</article>
+
+<article id="q052" class="question"><h4><span class="qnr">52) </span>Du wird von einem Erwachsenen zur Schule begleitet und fährst mit dem Scooter. Du darfst mit dem Scooter nur ..</h4>
+<p class="answ xa nco"><span class="abc">a) </span>auf dem Radweg fahren.</p>
+<p class="answ xb nco"><span class="abc">b) </span>auf der Straße fahren.</p>
+<p class="answ xc cor"><span class="abc">c) </span>auf dem Gehsteig fahren.</p>
+</article>
+
+<article id="q053" class="question"><h4><span class="qnr">53) </span>Diese Verkehrszeichen zeigt an, das ... <img class="vkz" src="./img/vkz/gef-fussgaenger.png"/></h4>
+<p class="answ xa cor"><span class="abc">a) </span>man sich einem Zebrastreifen nähert.</p>
+<p class="answ xb nco"><span class="abc">b) </span>jemand auf dem Zebrastreifen spazieren geht.</p>
+<p class="answ xc nco"><span class="abc">c) </span>jemand sich auf dem Gehsteig befindet.</p>
+</article>
+
+<article id="q054" class="question"><h4><span class="qnr">54) </span>In dem Bereich, wo du diese Verkehrstafel siehts, dürfen ... <img class="vkz" src="./img/vkz/hin-fuzo.png"/></h4>
+<p class="answ xa nco"><span class="abc">a) </span>Autos fahren.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Motorräder fahren.</p>
+<p class="answ xc cor"><span class="abc">c) </span>Fahrräder geschoben werden.</p>
+</article>
+
+<article id="q055" class="question"><h4><span class="qnr">55) </span>Alle Verkehrsteilnehmer müssen hier besonder auf ... <img class="vkz" src="./img/vkz/gef-kinder.png"/></h4>
+<p class="answ xa nco"><span class="abc">a) </span>Hunde achten.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Radfahrer achten.</p>
+<p class="answ xc cor"><span class="abc">c) </span>Kinder achten.</p>
+</article>
+
+<article id="q056" class="question"><h4><span class="qnr">56) </span>Hier nähert sich ein Zug einem ... <img class="vkz" src="./img/vkz/gef-ebk-unbeschrankt.png"/></h4>
+<p class="answ xa nco"><span class="abc">a) </span>Bahnhof.</p>
+<p class="answ xb cor"><span class="abc">b) </span>einem unbeschrankten Bahnübergang.</p>
+<p class="answ xc nco"><span class="abc">c) </span>einem Häuserblock.</p>
+</article>
+
+<article id="q057" class="question"><h4><span class="qnr">57) </span>Der Autofahrer muss hier ... <img class="vkz" src="./img/vkz/hin-wohnstrasse.png"/></h4>
+<p class="answ xa nco"><span class="abc">a) </span>warten, bis alle daheim sind.</p>
+<p class="answ xb nco"><span class="abc">b) </span>aus dem Auto aussteigen und den Kindern beim Spieln zuschauen.</p>
+<p class="answ xc cor"><span class="abc">c) </span>hier ganz langsam fahren und auf Fußgänger und spielende Kinder achten.</p>
+</article>
+
+<article id="q058" class="question"><h4><span class="qnr">58) </span>Was bedeutet dieses Verkehrszeichen? <img class="vkz" src="./img/vkz/geb-fussgaenger.png"/></h4>
+<p class="answ xa nco"><span class="abc">a) </span>Alte Menschen und Kinder dürfen sich hier die Hand geben.</p>
+<p class="answ xb cor"><span class="abc">b) </span>Jeder Fußgänger muss diesen Gehweg benützen.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Opa und Enkerl gehen heute spazieren.</p>
+</article>
+
+<!-- Seite5-->
+
+<h2>Fragankatalog ERSTE HILFE</h2>
+
+
+
+<article id="q059" class="question"><h4><span class="qnr">59) </span>Wer war der Gründer des Roten Kreuzes?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Henry Dunant.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Dr. Albert Schweitzer.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Dr. Theodor Körner.</p>
+</article>
+
+<article id="q060" class="question"><h4><span class="qnr">60) </span>Was stellt das ÖJRK in Katastrophen und Kriegsfällen hilfsbedürftigen Menschen zur Verfügung?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Decken.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Munition.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Alte Zeitungen.</p>
+</article>
+
+<article id="q061" class="question"><h4><span class="qnr">61) </span>Was ist erste Hilfe</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Einem Verletzten beim Aufstehen helfen.</p>
+<p class="answ xb cor"><span class="abc">b) </span>Einem Verletzten, Vergifteten durch erste einfache Handgriffe wirksam helfen.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Sofort die Rettung rufen.</p>
+</article>
+
+<article id="q062" class="question"><h4><span class="qnr">62) </span>Dürfen Wunden in der ersten Hilfe mit Puder behandelt werden?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Ja.</p>
+<p class="answ xb cor"><span class="abc">b) </span>Nein.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Nur wenn sie bluten.</p>
+</article>
+
+<article id="q063" class="question"><h4><span class="qnr">63) </span>Wie leistet man bei einer blutenden Wunde erste Hilfe?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Man gibt Puder drauf.</p>
+<p class="answ xb cor"><span class="abc">b) </span>man bedeckt die Wunde mit einem Wundverband.</p>
+<p class="answ xc nco"><span class="abc">c) </span>man tröstet den Verletzten.</p>
+</article>
+
+<article id="q064" class="question"><h4><span class="qnr">64) </span>Eine Schnittwunde ist eine</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Krankheit.</p>
+<p class="answ xb cor"><span class="abc">b) </span>Verletzunng.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Vergiftung.</p>
+</article>
+
+<article id="q065" class="question"><h4><span class="qnr">65) </span>Welche Erste Hilfe leistet Du bei einem Schiunfall?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Verletzten trösten.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Verletzten liegen lassen.</p>
+<p class="answ xc cor"><span class="abc">c) </span>Unfallstelle absichern.</p>
+</article>
+
+<article id="q066" class="question"><h4><span class="qnr">66) </span>Wenn ein Mensch auf lautes Ansprechen und sanftes Schütteln an den Schultern nicht reagiert, aber atmet,</h4>
+<p class="answ xa nco"><span class="abc">a) </span>schläft er.</p>
+<p class="answ xb nco"><span class="abc">b) </span>träumt er.</p>
+<p class="answ xc cor"><span class="abc">c) </span>ist er bewusstlos.</p>
+</article>
+
+<article id="q067" class="question"><h4><span class="qnr">67) </span>Jeder Bewusstlose befindet sich in Lebensgefahr, darum wird er nach der Atemkontrolle in</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Rückenlage gebracht.</p>
+<p class="answ xb nco"><span class="abc">b) </span>auf den Bauch gedreht.</p>
+<p class="answ xc cor"><span class="abc">c) </span>in die stabile Seitenlage gebracht.</p>
+</article>
+
+<article id="q068" class="question"><h4><span class="qnr">68) </span>Warum besteht für eine bewusstlose Person lebensgefahr?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Weil die Person schläft.</p>
+<p class="answ xb cor"><span class="abc">b) </span>Weil die Zunge die Atemwege verlegt.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Weil er auf dem Bauch liegt.</p>
+</article>                                        
+
+<article id="q069" class="question"><h4><span class="qnr">69) </span>Welche Information muss ein Notruf enthalten?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Wer ruft an?</p>
+<p class="answ xb nco"><span class="abc">b) </span>Welche Hose habe ich an?</p>
+<p class="answ xc nco"><span class="abc">c) </span>Ich mus mein Alter sagen.</p>
+</article>
+
+<article id="q070" class="question"><h4><span class="qnr">70) </span>Wie kann eine Kopfverletzung beim Radfahren vermieden werden?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Durch Tragen eines Fahrradhelmes.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Durch besonders langsames Fahren.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Durch Fahren in der Gruppe</p>
+</article>
+
+<article id="q071" class="question"><h4><span class="qnr">71) </span>Wie kann man Insektenstiche im Mund und Rachenraum vermeiden?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Nur Getränke aus der Dose trinken.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Nichts kaltes trinken.</p>
+<p class="answ xc cor"><span class="abc">c) </span>Genau schauen bevor man trinkt.</p>
+</article>
+
+<article id="q072" class="question"><h4><span class="qnr">72) </span>Welche Erste-Hilfe-Maßnahmen leistet du bei einer starken Blutung?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Ein Taschentuch raufgeben.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Wunde mit Salbe bestreichen.</p>
+<p class="answ xc cor"><span class="abc">c) </span>mit einer keimfreien Wundauflage direkt auf die start blutende Wunde drücken.</p>
+</article>
+
+<article id="q073" class="question"><h4><span class="qnr">73) </span>Wie erkennst du, ob eine reglose Persone ohne Bewusstsein ist?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Durch lautes Ansprechen.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Anstarren, enn sie sich nicht bewegt, liegen lassen?</p>
+<p class="answ xc nco"><span class="abc">c) </span>Person schnarcht.</p>
+</article>
+<!-- Seite 6-->
+
+<article id="q074" class="question"><h4><span class="qnr">74) </span>Welche Erste-Hilfe-Maßnahmen leistest du, enn eine Person reglos am Boden liegt?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>In vorgefundener Lage liegen lassen.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Verband anlegen.</p>
+<p class="answ xc cor"><span class="abc">c) </span>Stabile Seitenlage, Notruf tätigen.</p>
+</article>
+
+<article id="q075" class="question"><h4><span class="qnr">75) </span>Bei einer Atemkontrolle musst du...</h4>
+<p class="answ xa nco"><span class="abc">a) </span>sehen, ob sich der Fuß bewegt.</p>
+<p class="answ xb cor"><span class="abc">b) </span>auf Ein- und Ausatemgeräusche hören.</p>
+<p class="answ xc nco"><span class="abc">c) </span>die Person fragen, ob sie noch atmet.</p>
+</article>
+
+<article id="q076" class="question"><h4><span class="qnr">76) </span>Welche Erste-Hilfe-Maßnahmen führst du bei einem Insektenstich durch?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Beine hochlagern.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Einfach weiterspielen.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Bequemes Sitzen im Schatten.</p>
+</article>
+
+<article id="q077" class="question"><h4><span class="qnr">77) </span>Welche Wunden müssen von einem Arzt versorgt werden?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Tiefe, lange Wunden.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Kleine Schürfwunden.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Gelsenstiche</p>
+</article>
+
+<article id="q078" class="question"><h4><span class="qnr">78) </span>Welche Erste-Hilfe-Maßnahmen führst du bei Nasenbluten zuerst durch?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Nasenlöcher zusammendrücken.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Nase putzen lassen.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Heiße Umschläge in den Nacken legen.</p>
+</article>
+
+<article id="q079" class="question"><h4><span class="qnr">79) </span>Weclche Erste-Hilfe-Maßnahmen führst du bei einer Schürfwunde durch?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Wunde keimfrei verbinden.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Wund mit Puder versorgen.</p>
+<p class="answ xc nco"><span class="abc">c) </span>auf jeden Fall zum Arzt gehen.</p>
+</article>
+
+<article id="q080" class="question"><h4><span class="qnr">80) </span>Welche Schutzkleidung gibt es für das Fahrradfahren oder Inlineskaten?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Boxhandschuhe.</p>
+<p class="answ xb cor"><span class="abc">b) </span>Ellbogenschutz.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Badehose</p>
+</article>
+
+<article id="q081" class="question"><h4><span class="qnr">81) </span>Wodurch kannst du dich verbrennen?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Offenes Feuer.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Bei der Bodenheizung.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Mit der Taschenlampe</p>
+</article>
+
+<article id="q082" class="question"><h4><span class="qnr">82) </span>Welche Erste-Hilfe-Maßnahmen leistest du bei einem Tierbiss?</h4>
+<p class="answ xa cor"><span class="abc">a) </span>Einen keimfreien Verband anlegen.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Die Bissstelle aussaugen.</p>
+<p class="answ xc nco"><span class="abc">c) </span>Den Verletzten beruhigen.</p>
+</article>
+
+<article id="q083" class="question"><h4><span class="qnr">83) </span>Welche Erste-Hilfe-Maßnahmen leistest du bei einer Erfrierung?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Warme, gezuckerte Getränke verabreichen.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Alkohol zu trinken geben.</p>
+<p class="answ xc cor"><span class="abc">c) </span>Körper durch zusätzliche Kleidung oder Decken wärmen.</p>
+</article>
+
+<article id="q084" class="question"><h4><span class="qnr">84) </span>Wie kannst du eine Erfrierung vermeiden?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Einge Bekleidung und kleine Schuhe tragen.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Wasserhaltige Cremen fürs Gesicht verwenden.</p>
+<p class="answ xc cor"><span class="abc">c) </span>Handschuhe und Haube tragen.</p>
+</article>
+
+<article id="q085" class="question"><h4><span class="qnr">85) </span>Wechle Materialien aus einem Erste-Hilfe-Koffer benötigst du für einen Druckverband?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>Rettungsdecke.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Beatmungstuch.</p>
+<p class="answ xc cor"><span class="abc">c) </span>Keimfreie Wundauflage.</p>
+</article>
+
+<article id="q086" class="question"><h4><span class="qnr">86) </span>Welche Erste-Hilfe-Maßnahmen leistest du bei einer Verbrennung?</h4>
+<p class="answ xa nco"><span class="abc">a) </span>10 Minuten kühlen oder bis der/die Verletze fröstelt.</p>
+<p class="answ xb nco"><span class="abc">b) </span>Wunde mit Puder bedecken.</p>
+<p class="answ xc cor"><span class="abc">c) </span>Betroffenen Körperteil mit Wasser kühlen, bis die Rettung kommt.</p>
+</article>
+
+<!-- FRAGEN ENDE -->
+
+</section> <!-- end thequestions -->
+
+<footer id="quelle" class="hideontest">Ausdruck Magdalena.</footer>
+
+
+<footer id="testcontrols">
+	<span class="testinfo" id="qXofY">Frage 0/0.</span>
+	<span class="testinfo" id="qTime">Zeit 00:00:00.</span>
+	<span class="testinfo" id="qCorrect">0/0 richtig (0%).</span>
+	<button type="button" id="showresult">Prüfen</button>
+	<button type="button" id="next">Nächste Frage</button>
+</footer>
+
+<footer id="bybodi">Erstellt von Robert Bodenlenz <span id="bodilogo">bodi</span></footer>
+<footer id="disclaimer" class="hideontest">Trotz gewissenhafter Ausarbeitung alle Angaben ohne Gewähr.</footer>
+</body>
+
