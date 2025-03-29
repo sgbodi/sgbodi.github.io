@@ -129,6 +129,7 @@ function evalAnswer( qnr ) {
 			$("#q" + $.strPad( QuestionNrs[i], 3, '0') ).show();
 		};
 		$(".hideontest").show();
+		moveResultBar( perc );
 	}
 	console.log( "Done, evalAnswer. qnr <" + qnr + ">" );
 }
@@ -148,6 +149,22 @@ function shuffleAnswers( qnr ) {
 		$(this).appendTo( $(elem) );
 	});
 	console.log( "Done, shuffleAnswers. qnr <" + qnr + ">" );
+}
+
+
+function moveResultBar( percentage ) {
+  var elem = document.getElementById("resultBar");   
+  var width = 1;
+  var id = setInterval(frame, 10);
+  function frame() {
+    if (width >= percentage) {
+      clearInterval(id);
+    } else {
+      width++; 
+      elem.style.width = width + '%'; 
+	  elem.innerHTML = width * 1  + '%';
+    }
+  }
 }
 
 

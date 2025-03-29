@@ -56,10 +56,6 @@ h1,h2,h3,h4,h5,h6 {
 	/*.fa-play-circle*/
 	content: "\f144";
 }
-
-#btnreload {
-	border:1px solid #33b;
-}
 	 
 .notsupported , .notsupported * { text-decoration:line-through; }
 
@@ -173,6 +169,18 @@ p.qtrue > .qtt { display: block; font-size:80%; font-weight:bold; }
 .qtt::before { content:"Richtige Antwort"; }
 .qft::before { content:"Falsche Antwort"; }
 */
+
+/* Result summary */
+.button-row { background-color:#33b; }
+#resulttitle h2{ margin-bottom:0.2em; }
+
+
+.bar-border  {border:5px solid #33b; overflow:hidden; }
+.bar-container  {padding:0.01em 16px}
+.bar-light-grey {color:#000!important; background-color:#f1f1f1!important}
+.bar-green      {color:#fff!important; background-color:#4CAF50!important; text-align:center!important}
+
+
 
 
 article { margin-bottom:3em; }
