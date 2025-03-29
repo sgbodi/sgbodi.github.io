@@ -132,6 +132,7 @@ function evalAnswer( qnr ) {
 
 		$("#qXofY").hide();
 		$("#resulttitle").show();
+		$("#btnreload").show();
 		for( i=0; i<QuestionNrs.length; i++ ) {
 			$("#q" + $.strPad( QuestionNrs[i], 3, '0') ).show();
 		};
@@ -154,12 +155,16 @@ $(document).ready(function(){
 	$("#testcontrols").hide();
 	
 	$("#btnstart").click(function(){
+		$(".answ").removeClass("preview");
 		prepareTest();
 		$("#settings").hide();
 		$(".hideontest").hide();
 		$(".hideonly").hide();
 		showQuestion();
 		window.scrollTo(0,0);
+	});
+	$("#btnreload").click(function(){
+		location.reload();
 	});
 	$("#showresult").click(function(){
 		evalAnswer( QuestionIndex );
@@ -189,4 +194,8 @@ $(document).ready(function(){
 		cb.checked = true;
 		
 	});
+
+	//Richtige Antworten zu beginn zeigen
+	$(".answ").addClass("preview");
+	
 });

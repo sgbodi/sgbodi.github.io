@@ -25,7 +25,7 @@ h1,h2,h3,h4,h5,h6 {
 #settings li label { display:inline-block; min-width:8em; }
 #settings li label:hover { background-color:#66b; }
 #settings .hint { font-size:80%; font-weight:thin; margin-left:1.2em; }
-#btnstart {
+#btnstart, #btnreload {
 	border:1px solid white;
 	font-size:150%;
 	color:#fff;
@@ -33,7 +33,7 @@ h1,h2,h3,h4,h5,h6 {
 	margin:.3em;
 	min-width:10em;
 }
-#btnstart:before {
+#btnstart:before, #btnreload:before {
 	/*.fa*/
 	display: inline-block;
 	font: normal normal normal 14px/1 FontAwesome;
@@ -129,10 +129,11 @@ h1,h2,h3,h4,h5,h6 {
 .question.qtrue { background-color:#DBF9DB; }
 .question.qfalse { background-color:#FFDAB9; }
 
-.question.qtrue  p {  color:green; }
+.question.qtrue  p { color:green; }
 .question.qfalse p { color:red; }
 
 
+.preview.cor { text-decoration:underline; }
 
 .done .cor { text-decoration:underline; }
 .done .nco { }
