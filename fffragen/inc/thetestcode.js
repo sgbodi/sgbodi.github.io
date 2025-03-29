@@ -168,10 +168,51 @@ function moveResultBar( percentage ) {
 }
 
 
+function webstorageRestoreChecked( elemId ) {
+	if( document.getElementById( elemId ) == null ) {
+		return;
+	}
+	if( "Y" == localStorage.getItem( elemId ) ) {
+		document.getElementById( elemId ).checked = true;
+		return;
+	}
+	else if( "N" == localStorage.getItem( elemId ) ) {
+		document.getElementById( elemId ).checked = false;
+		return;
+	}
+	//default: do nothing
+}
+
+function webstorageStore() {
+	localStorage.setItem("chkBronze", ( $("#chkBronze")[0].checked ? "Y" : "N") );
+	localStorage.setItem("chkSilber", ( $("#chkSilber")[0].checked ? "Y" : "N") );
+	localStorage.setItem("chkGold"  , ( $("#chkGold")[0].checked ? "Y" : "N") );
+	localStorage.setItem("chkShuffleAnsw", ( $("#chkShuffleAnsw")[0].checked ? "Y" : "N") );
+	
+	const limit = parseInt( $(".rbQCount:checked")[0].value );
+	localStorage.setItem("rbQCount", limit );
+}
+
+function webstorageRestore() {
+	webstorageRestoreChecked( "chkBronze" );
+	webstorageRestoreChecked( "chkSilber" );
+	webstorageRestoreChecked( "chkGold"  );
+	webstorageRestoreChecked( "chkShuffleAnsw"  );
+	
+	const limit = localStorage.getItem("rbQCount");
+	$(".rbQCount").each(function(){
+		if( $(this).value == limit ) {
+			$(this).checked = true;
+		}
+	 });
+}
+
+
 $(document).ready(function(){
 	$("#testcontrols").hide();
 	
 	$("#btnstart").click(function(){
+		webstorageStore();
 		$(".answ").removeClass("preview");
 		prepareTest();
 		$("#settings").hide();
@@ -204,6 +245,8 @@ $(document).ready(function(){
 		if( !cb.disabled ) cb.checked = (!cb.checked);
 	});
 	
+	webstorageRestore();
+			
 	//Richtige Antworten zu beginn zeigen
 	$(".answ").addClass("preview");
 });
