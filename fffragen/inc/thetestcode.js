@@ -114,8 +114,17 @@ function evalAnswer( qnr ) {
 		$("#next").show();
 	}
 	else {
+		//final display prepareTest
+		let QueryCount = (QuestionNrs.length);
+		let CorrectCount = (DoneQuestionCount - FailedQueryNrs.length);
+		let perc = Math.round( (100-(FailedQueryNrs.length/DoneQuestionCount*100)) );
+		$("#qresCorrectCount").html("" + CorrectCount);
+		$("#qresTotalCount").html("" + DoneQuestionCount);
+		$("#qresPercent").html("" + perc + "%");
+		
 		$("#qXofY").hide();
 		$("#resulttitle").show();
+		$("#btnreload").show();
 		for( i=0; i<QuestionNrs.length; i++ ) {
 			$("#q" + $.strPad( QuestionNrs[i], 3, '0') ).show();
 		};
@@ -146,12 +155,16 @@ $(document).ready(function(){
 	$("#testcontrols").hide();
 	
 	$("#btnstart").click(function(){
+		$(".answ").removeClass("preview");
 		prepareTest();
 		$("#settings").hide();
 		$(".hideontest").hide();
 		$(".hideonly").hide();
 		showQuestion();
 		window.scrollTo(0,0);
+	});
+	$("#btnreload").click(function(){
+		location.reload();
 	});
 	$("#showresult").click(function(){
 		evalAnswer( QuestionIndex );
@@ -173,4 +186,7 @@ $(document).ready(function(){
 		var cb = $(this).find("input:checkbox")[0];
 		if( !cb.disabled ) cb.checked = (!cb.checked);
 	});
+	
+	//Richtige Antworten zu beginn zeigen
+	$(".answ").addClass("preview");
 });

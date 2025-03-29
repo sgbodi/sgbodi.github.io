@@ -36,7 +36,7 @@ h1,h2,h3,h4,h5,h6 {
 #settings li label { display:inline-block; min-width:8em; }
 #settings li label:hover { background-color:#66b; }
 #settings .hint { font-size:80%; font-weight:thin; margin-left:1.2em; }
-#btnstart {
+#btnstart, #btnreload {
 	border:1px solid white;
 	font-size:150%;
 	color:#fff;
@@ -44,7 +44,7 @@ h1,h2,h3,h4,h5,h6 {
 	margin:.3em;
 	min-width:10em;
 }
-#btnstart:before {
+#btnstart:before, #btnreload:before {
 	/*.fa*/
 	display: inline-block;
 	font: normal normal normal 14px/1 FontAwesome;
@@ -57,6 +57,10 @@ h1,h2,h3,h4,h5,h6 {
 	content: "\f144";
 }
 
+#btnreload {
+	border:1px solid #33b;
+}
+	 
 .notsupported , .notsupported * { text-decoration:line-through; }
 
 
@@ -131,6 +135,11 @@ h1,h2,h3,h4,h5,h6 {
 	/*.fa-percent*/
 	content: "\f295";
 }
+
+
+.preview.cor { text-decoration:underline; }
+.preview.nco { }
+
 	
 /* Query results display */
 .answ:hover { background-color:#eee; border-color:#ccc; }

@@ -24,9 +24,9 @@
 <div class="cfgblock" id="cfgBSG">
 <h6>Fragenkatalog</h6>
 <ul>
-<li><input type="checkbox" class="iBSG" id="chkBronze" qFrom="1" qTo="40" checked="checked"/><label for="chkBronze">Stufe 1 - Bronze</label><span class="hint">(40 Fragen)</span></li>
+<li><input type="checkbox" class="iBSG" id="chkBronze" qFrom="1"  qTo="40" checked="checked"/><label for="chkBronze">Stufe 1 - Bronze</label><span class="hint">(40 Fragen)</span></li>
 <li><input type="checkbox" class="iBSG" id="chkSilber" qFrom="41" qTo="50" checked="checked"/><label for="chkSilber">Stufe 2 - Silber</label><span class="hint">(+10 Fragen)</span></li>
-<li><input type="checkbox" class="iBSG" id="chkGold" qFrom="51" qTo="60"/><label for="chkGold">Stufe 3 - Gold</label><span class="hint">(+10 Fragen)</span></li>
+<li><input type="checkbox" class="iBSG" id="chkGold"   qFrom="51" qTo="60"/><label for="chkGold">Stufe 3 - Gold</label><span class="hint">(+10 Fragen)</span></li>
 </ul>
 </div>
 
@@ -54,7 +54,12 @@
 </section>
 
 
-<h2 id="resulttitle" style="display:none;">Fertig! Ergebnisse im Detail. (Für neuen Test Seite neu laden)</h2>
+<div id="resulttitle" style="display:none;">
+<h2>Fertig! Du hast <span id="qresCorrectCount">x</span> von <span id="qresTotalCount">y</span> Fragen richtig beantwortet (<span id="qresPercent">%</span>).</h2>
+<button type="button" id="btnreload">Nochmal</button>
+<h3>Deine Ergebnisse im Detail:</h3>
+</div>
+
 
 <span class="quelle hideonly">Quelle: Richtlinie Sanitätsleistungsprüfung RL-4.6.1/151-2020 vom 01. April 2022</span>
 
@@ -493,7 +498,7 @@
 </section> <!-- end thequestions -->
 
 
-<footer id="quelle" class="hideontest">Quelle: Richtlinie Sanitätsleistungsprüfung RL-4.6.1/151-2020 vom 01. April 2022</footer>
+<footer id="quelle" class="hideontest">Richtlinie Sanitätsleistungsprüfung RL-4.6.1/151-2020 vom 01. April 2022</footer>
 
 <footer id="testcontrols">
 	<span class="testinfo" id="qXofY">Frage 0/0.</span>
